@@ -19,25 +19,29 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Icon="pack://application:,,,/Resources/hair-dye-white.png">
     <Window.DataContext>
         <viewmodels:NavigationViewModel />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         <materialDesign:ColorZone Background="{StaticResource PrimaryHueDarkBrush}"
                                   VerticalAlignment="Stretch">
             <TextBlock Text="{Binding CurrentViewModel.Title}"
                        VerticalAlignment="Center"
                        TextAlignment="Center"
-                       Foreground="White" 
+                       Foreground="White"
                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                       Margin="5"/>
+                       Margin="5" />
         </materialDesign:ColorZone>
+        <Image Source="pack://application:,,,/Resources/hair-dye-white.png"
+               HorizontalAlignment="Left"
+               Margin="10" />
         <Frame Content="{Binding CurrentViewModel}"
                Grid.Row="1" />
         <materialDesign:Card Background="{StaticResource PrimaryHueDarkBrush}"
