@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PaintTintingDesktopApp.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -7,6 +8,8 @@ namespace PaintTintingDesktopApp.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        public IMessageBoxService MessageBoxService =>
+            DependencyService.Get<IMessageBoxService>();
         private bool isBusy;
         public bool IsBusy
         {

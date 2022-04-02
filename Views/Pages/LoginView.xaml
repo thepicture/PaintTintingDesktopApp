@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
+             xmlns:controls="clr-namespace:PaintTintingDesktopApp.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="450"
@@ -21,18 +23,24 @@
     <StackPanel Margin="60"
                 VerticalAlignment="Center">
         <UniformGrid Columns="2">
-            <TextBlock Text="Логин" 
-                       Style="{StaticResource CommonBlock}"/>
-            <TextBox Grid.Column="1" />
+            <TextBlock Text="Логин"
+                       Style="{StaticResource CommonBlock}" />
+            <TextBox Text="{Binding User.Login}"
+                     materialDesign:HintAssist.Hint="Введите логин"
+                     Grid.Column="1" />
         </UniformGrid>
         <UniformGrid Columns="2">
             <TextBlock Text="Пароль"
                        Style="{StaticResource CommonBlock}" />
-            <PasswordBox Grid.Column="1" />
+            <controls:BindablePasswordBox BindablePassword="{Binding Password}"
+                                          materialDesign:HintAssist.Hint="Введите пароль"
+                                          Grid.Column="1" />
         </UniformGrid>
         <UniformGrid Columns="2">
-            <Button Content="Авторизоваться" />
+            <Button Content="Авторизоваться" 
+                    Command="{Binding LoginCommand}"/>
             <Button Content="Выйти"
+                    Command="{Binding ExitCommand}"
                     Grid.Column="1" />
         </UniformGrid>
     </StackPanel>

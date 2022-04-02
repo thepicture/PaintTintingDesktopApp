@@ -20,7 +20,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Icon="pack://application:,,,/Resources/hair-dye-white.png">
+        Icon="pack://application:,,,/Resources/hair-dye-white.png"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewmodels:NavigationViewModel />
     </Window.DataContext>
