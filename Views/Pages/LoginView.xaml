@@ -36,6 +36,15 @@
                                           materialDesign:HintAssist.Hint="Введите пароль"
                                           Grid.Column="1" />
         </UniformGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <CheckBox Grid.Column="1"
+                      Content="Запомнить"
+                      IsChecked="{Binding IsRememberMe}"/>
+        </Grid>
         <UniformGrid Columns="2">
             <Button Content="Авторизоваться" 
                     Command="{Binding LoginCommand}"/>

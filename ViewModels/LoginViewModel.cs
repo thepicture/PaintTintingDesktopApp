@@ -1,5 +1,6 @@
 ﻿using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
 using System.Linq;
 using System.Text;
@@ -86,6 +87,11 @@ namespace PaintTintingDesktopApp.ViewModels
             });
             if (isAuthenticated)
             {
+                if (IsRememberMe)
+                {
+                    Settings.Default.IsAuthenticated = true;
+                    Settings.Default.Save();
+                }
                 await MessageBoxService.InformAsync("Вы авторизованы");
             }
             else
@@ -115,6 +121,14 @@ namespace PaintTintingDesktopApp.ViewModels
             {
                 App.Current.Shutdown();
             }
+        }
+
+        private bool isRememberMe = false;
+
+        public bool IsRememberMe
+        {
+            get => isRememberMe;
+            set => SetProperty(ref isRememberMe, value);
         }
     }
 }

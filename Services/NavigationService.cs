@@ -8,7 +8,9 @@ namespace PaintTintingDesktopApp.Services
         private readonly ObservableStack<ViewModelBase> journal =
             new ObservableStack<ViewModelBase>();
 
-        public ViewModelBase CurrentTarget => journal.Peek();
+        public ViewModelBase CurrentTarget => journal.Count == 0 
+            ? null 
+            : journal.Peek();
 
         public void Navigate<TWhere>() where TWhere : ViewModelBase
         {

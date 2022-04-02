@@ -1,4 +1,5 @@
 ﻿using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
 using PaintTintingDesktopApp.ViewModels;
 using System;
@@ -19,8 +20,15 @@ namespace PaintTintingDesktopApp
             DependencyService.Register<PasswordHashService>();
             DependencyService.Register<MessageBoxService>();
 
-            DependencyService.Get<INavigationService<ViewModelBase>>()
-                .Navigate<LoginViewModel>();
+            if (Settings.Default.IsAuthenticated)
+            {
+
+            }
+            else
+            {
+                DependencyService.Get<INavigationService<ViewModelBase>>()
+                    .Navigate<LoginViewModel>();
+            }
         }
 
         void InsertUser()

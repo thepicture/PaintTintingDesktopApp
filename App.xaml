@@ -36,6 +36,11 @@
                 <Setter Property="Margin"
                         Value="5" />
             </Style>
+            <Style BasedOn="{StaticResource MaterialDesignCheckBox}"
+                   TargetType="CheckBox">
+                <Setter Property="Margin"
+                        Value="5" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
