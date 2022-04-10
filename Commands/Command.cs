@@ -15,6 +15,13 @@ namespace PaintTintingDesktopApp.Commands
         }
 
         public Command(Action<object> execute) : this(execute, null) { }
+        public Command(Action execute)
+        {
+            this.execute = (obj) =>
+            {
+                execute();
+            };
+        }
 
         public event EventHandler CanExecuteChanged
         {
@@ -34,6 +41,15 @@ namespace PaintTintingDesktopApp.Commands
         }
 
         public void Execute(object parameter)
+        {
+            execute(parameter);
+        }
+        public bool CanExecute<T>(T parameter)
+        {
+            return canExecute == null || canExecute(parameter);
+        }
+
+        public void Execute<T>(T parameter)
         {
             execute(parameter);
         }

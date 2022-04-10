@@ -38,7 +38,7 @@ namespace PaintTintingDesktopApp.ViewModels
             }
         }
 
-        private async void LoginAsync(object parameter)
+        private async void LoginAsync()
         {
             if (await LoginDataStore.AddItemAsync(User))
             {
@@ -65,7 +65,7 @@ namespace PaintTintingDesktopApp.ViewModels
             }
         }
 
-        private async void ExitAsync(object parameter)
+        private async void ExitAsync()
         {
             if (await MessageBoxService.AskAsync("Выйти из приложения?"))
             {
@@ -96,7 +96,7 @@ namespace PaintTintingDesktopApp.ViewModels
             }
         }
 
-        private void GoToRegisterPageAsync(object commandParameter)
+        private void GoToRegisterPageAsync()
         {
             NavigationService.Navigate<RegisterViewModel>();
         }
