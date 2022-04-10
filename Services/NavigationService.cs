@@ -1,26 +1,40 @@
 ﻿using PaintTintingDesktopApp.ViewModels;
 using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace PaintTintingDesktopApp.Services
 {
     public class NavigationService : INavigationService<ViewModelBase>
     {
-        private readonly ObservableStack<ViewModelBase> journal =
+        public NavigationService()
+        {
+            Journal.CollectionChanged += OnNavigated;
+        }
+
+        private void OnNavigated(object sender,
+                                 NotifyCollectionChangedEventArgs e)
+        {
+            Navigated?.Invoke();
+        }
+
+        public ObservableStack<ViewModelBase> Journal { get; set; } =
             new ObservableStack<ViewModelBase>();
 
-        public ViewModelBase CurrentTarget => journal.Count == 0 
-            ? null 
-            : journal.Peek();
+        public ViewModelBase CurrentTarget => Journal.Peek();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event Action Navigated;
 
         public void Navigate<TWhere>() where TWhere : ViewModelBase
         {
-            journal.Push(
+            Journal.Push(
                 Activator.CreateInstance<TWhere>());
         }
 
         public void NavigateBack()
         {
-            _ = journal.Pop();
+            _ = Journal.Pop();
         }
 
         public void NavigateToRoot()
@@ -34,7 +48,7 @@ namespace PaintTintingDesktopApp.Services
         public void NavigateWithParameter<TWhere, TParam>(TParam param)
             where TWhere : ViewModelBase
         {
-            journal.Push(
+            Journal.Push(
                 (ViewModelBase)
                 Activator.CreateInstance(typeof(TParam),
                                          new object[] { param }));
@@ -42,7 +56,7 @@ namespace PaintTintingDesktopApp.Services
 
         public bool CanNavigateBack()
         {
-            return journal.Count > 1;
+            return Journal.Count > 1;
         }
     }
 }

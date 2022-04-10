@@ -8,6 +8,8 @@ namespace PaintTintingDesktopApp.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        public INavigationService<ViewModelBase> NavigationService =>
+            DependencyService.Get<INavigationService<ViewModelBase>>();
         public IMessageBoxService MessageBoxService =>
             DependencyService.Get<IMessageBoxService>();
         private bool isBusy;

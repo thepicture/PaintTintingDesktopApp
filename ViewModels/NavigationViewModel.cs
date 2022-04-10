@@ -1,11 +1,19 @@
-﻿using PaintTintingDesktopApp.Services;
-
-namespace PaintTintingDesktopApp.ViewModels
+﻿namespace PaintTintingDesktopApp.ViewModels
 {
     public class NavigationViewModel : ViewModelBase
     {
-        public ViewModelBase CurrentViewModel => DependencyService
-            .Get<INavigationService<ViewModelBase>>()
-            .CurrentTarget;
+        public NavigationViewModel()
+        {
+            NavigationService.Navigated += OnNavigated;
+        }
+
+        private void OnNavigated()
+        {
+            OnPropertyChanged(
+                nameof(CurrentViewModel));
+        }
+
+        public ViewModelBase CurrentViewModel => 
+            NavigationService.CurrentTarget;
     }
 }

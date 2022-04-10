@@ -52,5 +52,8 @@
                     Command="{Binding ExitCommand}"
                     Grid.Column="1" />
         </UniformGrid>
+        <Button Content="Ещё нет аккаунта?"
+                Command="{Binding GoToRegisterPageCommand}"
+                Grid.Column="1" />
     </StackPanel>
 </UserControl>

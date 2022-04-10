@@ -1,8 +1,11 @@
-﻿namespace PaintTintingDesktopApp.Services
+﻿using System;
+
+namespace PaintTintingDesktopApp.Services
 {
     public interface INavigationService<TTarget>
     {
         TTarget CurrentTarget { get; }
+        event Action Navigated;
         void NavigateBack();
         bool CanNavigateBack();
         void Navigate<TWhere>() where TWhere : TTarget;

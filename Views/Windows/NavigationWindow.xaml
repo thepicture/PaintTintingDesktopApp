@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Height="450"
         Width="800"
-        MinHeight="450"
+        MinHeight="650"
         MinWidth="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
@@ -44,7 +44,8 @@
                HorizontalAlignment="Left"
                Margin="10" />
         <Frame Content="{Binding CurrentViewModel}"
-               Grid.Row="1" />
+               Grid.Row="1"
+               NavigationUIVisibility="Hidden" />
         <materialDesign:Card Background="{StaticResource PrimaryHueDarkBrush}"
                              Grid.Row="2" />
     </Grid>

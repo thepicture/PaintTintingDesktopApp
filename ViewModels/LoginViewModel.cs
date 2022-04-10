@@ -79,10 +79,10 @@ namespace PaintTintingDesktopApp.ViewModels
                         return false;
                     }
                     byte[] salt = dbUser.Salt;
-                    byte[] passwordHash = DependencyService
-                        .Get<IPasswordHashService>()
+                    byte[] passwordHash = PasswordHashService
                         .GetHash(Password, salt);
-                    return Enumerable.SequenceEqual(dbUser.PasswordHash, passwordHash);
+                    return Enumerable.SequenceEqual(dbUser.PasswordHash,
+                                                    passwordHash);
                 }
             });
             if (isAuthenticated)
@@ -96,7 +96,8 @@ namespace PaintTintingDesktopApp.ViewModels
             }
             else
             {
-                await MessageBoxService.InformAsync("Неверный логин или пароль");
+                await MessageBoxService
+                    .InformAsync("Неверный логин или пароль");
             }
         }
 
@@ -129,6 +130,26 @@ namespace PaintTintingDesktopApp.ViewModels
         {
             get => isRememberMe;
             set => SetProperty(ref isRememberMe, value);
+        }
+
+        private Command goToRegisterPageCommand;
+
+        public ICommand GoToRegisterPageCommand
+        {
+            get
+            {
+                if (goToRegisterPageCommand == null)
+                {
+                    goToRegisterPageCommand = new Command(GoToRegisterPageAsync);
+                }
+
+                return goToRegisterPageCommand;
+            }
+        }
+
+        private void GoToRegisterPageAsync(object commandParameter)
+        {
+            NavigationService.Navigate<RegisterViewModel>();
         }
     }
 }
