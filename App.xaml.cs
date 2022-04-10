@@ -20,6 +20,7 @@ namespace PaintTintingDesktopApp
             DependencyService.Register<PasswordHashService>();
             DependencyService.Register<MessageBoxService>();
             DependencyService.Register<LoginDataStore>();
+            DependencyService.Register<RegisterDataStore>();
 
             if (Settings.Default.IsAuthenticated)
             {
@@ -55,8 +56,8 @@ namespace PaintTintingDesktopApp
                     PasswordHash = passwordHash,
                     Salt = salt
                 };
-                entities.User.Add(user);
-                entities.SaveChanges();
+                _ = entities.User.Add(user);
+                _ = entities.SaveChanges();
             }
         }
     }

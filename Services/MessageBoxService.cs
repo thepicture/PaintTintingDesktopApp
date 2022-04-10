@@ -21,7 +21,7 @@ namespace PaintTintingDesktopApp.Services
         {
             await Task.Run(() =>
             {
-                MessageBox.Show(information,
+                _ = MessageBox.Show(information,
                                 "Информация",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
@@ -32,7 +32,7 @@ namespace PaintTintingDesktopApp.Services
         {
             await Task.Run(() =>
             {
-                MessageBox.Show(error,
+                _ = MessageBox.Show(error,
                                 "Ошибка",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -43,7 +43,7 @@ namespace PaintTintingDesktopApp.Services
         {
             await Task.Run(() =>
             {
-                MessageBox.Show(warning,
+                _ = MessageBox.Show(warning,
                                 "Предупреждение",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);

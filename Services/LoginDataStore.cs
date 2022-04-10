@@ -1,4 +1,5 @@
 ﻿using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Models.PartialModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace PaintTintingDesktopApp.Services
 {
-    public class LoginDataStore : IDataStore<User>
+    public class LoginDataStore : IDataStore<LoginUser>
     {
-        public async Task<bool> AddItemAsync(User item)
+        public async Task<bool> AddItemAsync(LoginUser item)
         {
             StringBuilder errors = new StringBuilder();
             if (string.IsNullOrWhiteSpace(item.Login))
@@ -33,18 +34,18 @@ namespace PaintTintingDesktopApp.Services
                 using (PaintTintingBaseEntities entities =
                     new PaintTintingBaseEntities())
                 {
-                    User dbUser = entities.User
+                    User dbLoginUser = entities.User
                         .AsNoTracking()
                         .FirstOrDefault(u => u.Login == item.Login);
-                    if (dbUser == null)
+                    if (dbLoginUser == null)
                     {
                         return false;
                     }
-                    byte[] salt = dbUser.Salt;
+                    byte[] salt = dbLoginUser.Salt;
                     byte[] passwordHash = DependencyService
                         .Get<IPasswordHashService>()
                         .GetHash(item.PlainPassword, salt);
-                    return Enumerable.SequenceEqual(dbUser.PasswordHash,
+                    return Enumerable.SequenceEqual(dbLoginUser.PasswordHash,
                                                     passwordHash);
                 }
             });
@@ -68,17 +69,17 @@ namespace PaintTintingDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<User> GetItemAsync(string id)
+        public Task<LoginUser> GetItemAsync(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetItemsAsync(bool forceRefresh = false)
+        public Task<IEnumerable<LoginUser>> GetItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateItemAsync(User item)
+        public Task<bool> UpdateItemAsync(LoginUser item)
         {
             throw new NotImplementedException();
         }

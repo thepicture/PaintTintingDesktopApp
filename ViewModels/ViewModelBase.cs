@@ -1,4 +1,4 @@
-﻿using PaintTintingDesktopApp.Models.Entities;
+﻿using PaintTintingDesktopApp.Models.PartialModels;
 using PaintTintingDesktopApp.Services;
 using System;
 using System.Collections.Generic;
@@ -11,8 +11,10 @@ namespace PaintTintingDesktopApp.ViewModels
     {
         public INavigationService<ViewModelBase> NavigationService =>
             DependencyService.Get<INavigationService<ViewModelBase>>();
-        public IDataStore<User> LoginDataStore =>
-           DependencyService.Get<IDataStore<User>>();
+        public IDataStore<LoginUser> LoginDataStore =>
+           DependencyService.Get<IDataStore<LoginUser>>();
+        public IDataStore<RegisterUser> RegisterDataStore =>
+           DependencyService.Get<IDataStore<RegisterUser>>();
         public IMessageBoxService MessageBoxService =>
             DependencyService.Get<IMessageBoxService>();
         private bool isBusy;

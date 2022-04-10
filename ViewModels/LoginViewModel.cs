@@ -1,5 +1,5 @@
 ﻿using PaintTintingDesktopApp.Commands;
-using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Models.PartialModels;
 using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
 using System.Windows.Input;
@@ -8,9 +8,9 @@ namespace PaintTintingDesktopApp.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private User user;
+        private LoginUser user = new LoginUser();
 
-        public User User
+        public LoginUser User
         {
             get => user;
             set => SetProperty(ref user, value);
@@ -20,7 +20,6 @@ namespace PaintTintingDesktopApp.ViewModels
         public LoginViewModel()
         {
             Title = "Страница авторизации";
-            User = new User();
         }
 
         private Command loginCommand;

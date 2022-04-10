@@ -1,19 +1,19 @@
 ﻿using PaintTintingDesktopApp.Commands;
-using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Models.PartialModels;
 using System.Windows.Input;
 
 namespace PaintTintingDesktopApp.ViewModels
 {
     public class RegisterViewModel : ViewModelBase
     {
-        private User user;
+        private RegisterUser user = new RegisterUser();
 
         public RegisterViewModel()
         {
             Title = "Страница регистрации";
         }
 
-        public User User
+        public RegisterUser User
         {
             get => user;
             set => SetProperty(ref user, value);
@@ -42,8 +42,12 @@ namespace PaintTintingDesktopApp.ViewModels
             }
         }
 
-        private async void RegisterAsync(object commandParameter)
+        private async void RegisterAsync()
         {
+            if (await RegisterDataStore.AddItemAsync(User))
+            {
+                NavigationService.NavigateBack();
+            }
         }
     }
 }
