@@ -2,9 +2,6 @@
 using PaintTintingDesktopApp.Models.Entities;
 using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PaintTintingDesktopApp.ViewModels
@@ -26,14 +23,6 @@ namespace PaintTintingDesktopApp.ViewModels
             User = new User();
         }
 
-        private string password;
-
-        public string Password
-        {
-            get => password;
-            set => SetProperty(ref password, value);
-        }
-
         private Command loginCommand;
 
         public ICommand LoginCommand
@@ -51,53 +40,13 @@ namespace PaintTintingDesktopApp.ViewModels
 
         private async void LoginAsync(object parameter)
         {
-            StringBuilder errors = new StringBuilder();
-            if (string.IsNullOrWhiteSpace(User.Login))
-            {
-                _ = errors.AppendLine("Введите логин");
-            }
-            if (string.IsNullOrWhiteSpace(Password))
-            {
-                _ = errors.AppendLine("Введите пароль");
-            }
-            if (errors.Length > 0)
-            {
-                await MessageBoxService.InformErrorAsync(
-                    errors.ToString());
-                return;
-            }
-            bool isAuthenticated = await Task.Run(() =>
-            {
-                using (PaintTintingBaseEntities entities =
-                    new PaintTintingBaseEntities())
-                {
-                    User dbUser = entities.User
-                        .AsNoTracking()
-                        .FirstOrDefault(u => u.Login == User.Login);
-                    if (dbUser == null)
-                    {
-                        return false;
-                    }
-                    byte[] salt = dbUser.Salt;
-                    byte[] passwordHash = PasswordHashService
-                        .GetHash(Password, salt);
-                    return Enumerable.SequenceEqual(dbUser.PasswordHash,
-                                                    passwordHash);
-                }
-            });
-            if (isAuthenticated)
+            if (await LoginDataStore.AddItemAsync(User))
             {
                 if (IsRememberMe)
                 {
                     Settings.Default.IsAuthenticated = true;
                     Settings.Default.Save();
                 }
-                await MessageBoxService.InformAsync("Вы авторизованы");
-            }
-            else
-            {
-                await MessageBoxService
-                    .InformAsync("Неверный логин или пароль");
             }
         }
 

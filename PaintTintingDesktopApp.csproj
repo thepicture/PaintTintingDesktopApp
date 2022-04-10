@@ -122,10 +122,13 @@
     <Compile Include="Models\Entities\UserType.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialModels\PartialUser.cs" />
     <Compile Include="Services\DependencyService.cs" />
+    <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPasswordHashService.cs" />
+    <Compile Include="Services\LoginDataStore.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />

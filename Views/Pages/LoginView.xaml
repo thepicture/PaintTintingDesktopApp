@@ -32,7 +32,7 @@
         <UniformGrid Columns="2">
             <TextBlock Text="Пароль"
                        Style="{StaticResource CommonBlock}" />
-            <controls:BindablePasswordBox BindablePassword="{Binding Password}"
+            <controls:BindablePasswordBox BindablePassword="{Binding User.PlainPassword}"
                                           materialDesign:HintAssist.Hint="Введите пароль"
                                           Grid.Column="1" />
         </UniformGrid>

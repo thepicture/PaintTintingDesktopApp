@@ -19,6 +19,7 @@ namespace PaintTintingDesktopApp
             DependencyService.Register<NavigationService>();
             DependencyService.Register<PasswordHashService>();
             DependencyService.Register<MessageBoxService>();
+            DependencyService.Register<LoginDataStore>();
 
             if (Settings.Default.IsAuthenticated)
             {
