@@ -1,7 +1,7 @@
 ﻿using PaintTintingDesktopApp.ViewModels;
 using System;
 using System.Collections.Specialized;
-using System.ComponentModel;
+using System.Linq;
 
 namespace PaintTintingDesktopApp.Services
 {
@@ -23,7 +23,6 @@ namespace PaintTintingDesktopApp.Services
 
         public ViewModelBase CurrentTarget => Journal.Peek();
 
-        public event PropertyChangedEventHandler PropertyChanged;
         public event Action Navigated;
 
         public void Navigate<TWhere>() where TWhere : ViewModelBase
@@ -39,7 +38,7 @@ namespace PaintTintingDesktopApp.Services
 
         public void NavigateToRoot()
         {
-            while (CanNavigateBack())
+            while (Journal.Count > 1)
             {
                 NavigateBack();
             }
@@ -56,7 +55,14 @@ namespace PaintTintingDesktopApp.Services
 
         public bool CanNavigateBack()
         {
-            return Journal.Count > 1;
+            if (Journal.Count < 2)
+            {
+                return false;
+            }
+            ViewModelBase viewModel = Journal
+                .ElementAt(1);
+            return !(viewModel is LoginViewModel)
+                   || Journal.Peek() is RegisterViewModel;
         }
     }
 }

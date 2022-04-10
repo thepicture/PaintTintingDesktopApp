@@ -16,12 +16,22 @@ namespace PaintTintingDesktopApp.ViewModels
                 nameof(CurrentViewModel));
             OnPropertyChanged(
                 nameof(CanGoBack));
+            OnPropertyChanged(
+                nameof(CanClearSession));
         }
 
         public ViewModelBase CurrentViewModel =>
             NavigationService.CurrentTarget;
         public bool CanGoBack =>
             NavigationService.CanNavigateBack();
+        public bool CanClearSession
+        {
+            get
+            {
+                return SessionService.PermanentIdentity != null
+                       || SessionService.TemporaryIdentity != null;
+            }
+        }
 
         private Command goBackCommand;
 
@@ -41,6 +51,32 @@ namespace PaintTintingDesktopApp.ViewModels
         private void GoBack(object commandParameter)
         {
             NavigationService.NavigateBack();
+        }
+
+        private Command clearSessionCommand;
+
+        public ICommand ClearSessionCommand
+        {
+            get
+            {
+                if (clearSessionCommand == null)
+                {
+                    clearSessionCommand = new Command(ClearSessionAsync);
+                }
+
+                return clearSessionCommand;
+            }
+        }
+
+        private async void ClearSessionAsync()
+        {
+            if (await MessageBoxService.AskAsync("Завершить сессию "
+                    + "и вернуться на страницу авторизации?"))
+            {
+                SessionService.PermanentIdentity = null;
+                SessionService.TemporaryIdentity = null;
+                NavigationService.NavigateToRoot();
+            }
         }
     }
 }

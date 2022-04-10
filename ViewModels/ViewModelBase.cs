@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Models.PartialModels;
+﻿using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Models.PartialModels;
 using PaintTintingDesktopApp.Services;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace PaintTintingDesktopApp.ViewModels
            DependencyService.Get<IDataStore<RegisterUser>>();
         public IMessageBoxService MessageBoxService =>
             DependencyService.Get<IMessageBoxService>();
+        public ISessionService<User> SessionService =>
+            DependencyService.Get<ISessionService<User>>();
+
         private bool isBusy;
         public bool IsBusy
         {

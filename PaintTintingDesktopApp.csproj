@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ColorPicker, Version=3.3.1.0, Culture=neutral, PublicKeyToken=1c61eec504ce2276, processorArchitecture=MSIL">
+      <HintPath>packages\PixiEditor.ColorPicker.3.3.1\lib\net451\ColorPicker.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -48,6 +51,9 @@
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.4.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignThemes.4.4.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -85,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PaintTintingBuildView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,24 +139,31 @@
     <Compile Include="Models\PartialModels\LoginUser.cs" />
     <Compile Include="Models\PartialModels\PartialUser.cs" />
     <Compile Include="Models\PartialModels\RegisterUser.cs" />
+    <Compile Include="Models\Serialized\SerializedUser.cs" />
     <Compile Include="Services\DependencyService.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPasswordHashService.cs" />
+    <Compile Include="Services\ISessionService.cs" />
     <Compile Include="Services\LoginDataStore.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="Services\RegisterDataStore.cs" />
+    <Compile Include="Services\SessionService.cs" />
     <Compile Include="Utils\NotifyChanger.cs" />
     <Compile Include="Utils\ObservableStack.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\PaintTintingBuildViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Pages\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PaintTintingBuildView.xaml.cs">
+      <DependentUpon>PaintTintingBuildView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>

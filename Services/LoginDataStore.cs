@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Models.Entities;
+﻿using Newtonsoft.Json;
+using PaintTintingDesktopApp.Models.Entities;
 using PaintTintingDesktopApp.Models.PartialModels;
 using System;
 using System.Collections.Generic;
@@ -69,9 +70,27 @@ namespace PaintTintingDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<LoginUser> GetItemAsync(string id)
+        public async Task<LoginUser> GetItemAsync(string id)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                using (PaintTintingBaseEntities entities =
+                new PaintTintingBaseEntities())
+                {
+                    User user = entities.User
+                    .FirstOrDefault(u =>
+                        u.Login.Equals(id,
+                                       StringComparison.OrdinalIgnoreCase));
+                    JsonSerializerSettings settings =
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        };
+                    LoginUser loginUser = JsonConvert.DeserializeObject<LoginUser>(
+                        JsonConvert.SerializeObject(user, settings));
+                    return loginUser;
+                }
+            });
         }
 
         public Task<IEnumerable<LoginUser>> GetItemsAsync(bool forceRefresh = false)

@@ -1,6 +1,6 @@
 ﻿using PaintTintingDesktopApp.Commands;
+using PaintTintingDesktopApp.Models.Entities;
 using PaintTintingDesktopApp.Models.PartialModels;
-using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
 using System.Windows.Input;
 
@@ -41,11 +41,20 @@ namespace PaintTintingDesktopApp.ViewModels
         {
             if (await LoginDataStore.AddItemAsync(User))
             {
-                if (IsRememberMe)
+                if (await LoginDataStore.GetItemAsync(User.Login) != null)
                 {
-                    Settings.Default.IsAuthenticated = true;
-                    Settings.Default.Save();
+                    User identity = await LoginDataStore
+                        .GetItemAsync(User.Login);
+                    if (IsRememberMe)
+                    {
+                        SessionService.PermanentIdentity = identity;
+                    }
+                    else
+                    {
+                        SessionService.TemporaryIdentity = identity;
+                    }
                 }
+                NavigationService.Navigate<PaintTintingBuildViewModel>();
             }
         }
 

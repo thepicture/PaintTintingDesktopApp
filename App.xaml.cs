@@ -21,15 +21,15 @@ namespace PaintTintingDesktopApp
             DependencyService.Register<MessageBoxService>();
             DependencyService.Register<LoginDataStore>();
             DependencyService.Register<RegisterDataStore>();
+            DependencyService.Register<SessionService>();
 
-            if (Settings.Default.IsAuthenticated)
-            {
-
-            }
-            else
+            DependencyService.Get<INavigationService<ViewModelBase>>()
+                   .Navigate<LoginViewModel>();
+            if (!string.IsNullOrWhiteSpace(
+                Settings.Default.UserBase64))
             {
                 DependencyService.Get<INavigationService<ViewModelBase>>()
-                    .Navigate<LoginViewModel>();
+                   .Navigate<PaintTintingBuildViewModel>();
             }
         }
 

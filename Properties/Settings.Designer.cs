@@ -25,13 +25,13 @@ namespace PaintTintingDesktopApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsAuthenticated {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserBase64 {
             get {
-                return ((bool)(this["IsAuthenticated"]));
+                return ((string)(this["UserBase64"]));
             }
             set {
-                this["IsAuthenticated"] = value;
+                this["UserBase64"] = value;
             }
         }
     }
