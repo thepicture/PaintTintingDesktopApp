@@ -12,25 +12,23 @@ namespace PaintTintingDesktopApp.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Paint
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Paint()
         {
             this.Order = new HashSet<Order>();
         }
     
         public int Id { get; set; }
-        public int UserTypeId { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Patronymic { get; set; }
-        public string Login { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] Salt { get; set; }
+        public string ColorAsHex { get; set; }
+        public string ProductName { get; set; }
+        public int PaintProviderId { get; set; }
+        public int PackagingInLiters { get; set; }
+        public decimal PriceInRubles { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
-        public virtual UserType UserType { get; set; }
+        public virtual PaintProvider PaintProvider { get; set; }
     }
 }

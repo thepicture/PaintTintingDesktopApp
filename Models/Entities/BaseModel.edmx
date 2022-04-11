@@ -5,6 +5,42 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PaintTintingBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaintId" Type="int" Nullable="false" />
+          <Property Name="NumberOfPaint" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="SellerId" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorAsHex" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="ProductName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PaintProviderId" Type="int" Nullable="false" />
+          <Property Name="PackagingInLiters" Type="int" Nullable="false" />
+          <Property Name="PriceInRubles" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaintProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -25,6 +61,54 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Paint">
+          <End Role="Paint" Type="Self.Paint" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PaintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paint_PaintProvider">
+          <End Role="PaintProvider" Type="Self.PaintProvider" Multiplicity="1" />
+          <End Role="Paint" Type="Self.Paint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaintProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paint">
+              <PropertyRef Name="PaintProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserType">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -38,8 +122,28 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PaintTintingBaseModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paint" EntityType="Self.Paint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaintProvider" EntityType="Self.PaintProvider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Paint" Association="Self.FK_Order_Paint">
+            <End Role="Paint" EntitySet="Paint" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paint_PaintProvider" Association="Self.FK_Paint_PaintProvider">
+            <End Role="PaintProvider" EntitySet="PaintProvider" />
+            <End Role="Paint" EntitySet="Paint" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
@@ -50,13 +154,76 @@
     <edmx:ConceptualModels>
       <Schema Namespace="PaintTintingBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PaintTintingBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="PaintTintingBaseModel.Customer" />
+          <EntitySet Name="Order" EntityType="PaintTintingBaseModel.Order" />
+          <EntitySet Name="Paint" EntityType="PaintTintingBaseModel.Paint" />
+          <EntitySet Name="PaintProvider" EntityType="PaintTintingBaseModel.PaintProvider" />
           <EntitySet Name="User" EntityType="PaintTintingBaseModel.User" />
           <EntitySet Name="UserType" EntityType="PaintTintingBaseModel.UserType" />
+          <AssociationSet Name="FK_Order_Customer" Association="PaintTintingBaseModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Paint" Association="PaintTintingBaseModel.FK_Order_Paint">
+            <End Role="Paint" EntitySet="Paint" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="PaintTintingBaseModel.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paint_PaintProvider" Association="PaintTintingBaseModel.FK_Paint_PaintProvider">
+            <End Role="PaintProvider" EntitySet="PaintProvider" />
+            <End Role="Paint" EntitySet="Paint" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="PaintTintingBaseModel.FK_User_UserType">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="PaintTintingBaseModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaintId" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfPaint" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="PaintTintingBaseModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Paint" Relationship="PaintTintingBaseModel.FK_Order_Paint" FromRole="Order" ToRole="Paint" />
+          <NavigationProperty Name="User" Relationship="PaintTintingBaseModel.FK_Order_User" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Paint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorAsHex" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PaintProviderId" Type="Int32" Nullable="false" />
+          <Property Name="PackagingInLiters" Type="Int32" Nullable="false" />
+          <Property Name="PriceInRubles" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Order" Relationship="PaintTintingBaseModel.FK_Order_Paint" FromRole="Paint" ToRole="Order" />
+          <NavigationProperty Name="PaintProvider" Relationship="PaintTintingBaseModel.FK_Paint_PaintProvider" FromRole="Paint" ToRole="PaintProvider" />
+        </EntityType>
+        <EntityType Name="PaintProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Paint" Relationship="PaintTintingBaseModel.FK_Paint_PaintProvider" FromRole="PaintProvider" ToRole="Paint" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -69,6 +236,7 @@
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="16" FixedLength="false" />
+          <NavigationProperty Name="Order" Relationship="PaintTintingBaseModel.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="UserType" Relationship="PaintTintingBaseModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
         </EntityType>
         <EntityType Name="UserType">
@@ -79,6 +247,54 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="PaintTintingBaseModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
         </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Type="PaintTintingBaseModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="PaintTintingBaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Paint">
+          <End Type="PaintTintingBaseModel.Paint" Role="Paint" Multiplicity="1" />
+          <End Type="PaintTintingBaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PaintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Type="PaintTintingBaseModel.User" Role="User" Multiplicity="1" />
+          <End Type="PaintTintingBaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paint_PaintProvider">
+          <End Type="PaintTintingBaseModel.PaintProvider" Role="PaintProvider" Multiplicity="1" />
+          <End Type="PaintTintingBaseModel.Paint" Role="Paint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaintProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paint">
+              <PropertyRef Name="PaintProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserType">
           <End Type="PaintTintingBaseModel.UserType" Role="UserType" Multiplicity="1" />
           <End Type="PaintTintingBaseModel.User" Role="User" Multiplicity="*" />
@@ -91,12 +307,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PaintTintingBaseModelStoreContainer" CdmEntityContainer="PaintTintingBaseEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="PaintTintingBaseModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="PaintTintingBaseModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="NumberOfPaint" ColumnName="NumberOfPaint" />
+                <ScalarProperty Name="PaintId" ColumnName="PaintId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paint">
+            <EntityTypeMapping TypeName="PaintTintingBaseModel.Paint">
+              <MappingFragment StoreEntitySet="Paint">
+                <ScalarProperty Name="PriceInRubles" ColumnName="PriceInRubles" />
+                <ScalarProperty Name="PackagingInLiters" ColumnName="PackagingInLiters" />
+                <ScalarProperty Name="PaintProviderId" ColumnName="PaintProviderId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ColorAsHex" ColumnName="ColorAsHex" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaintProvider">
+            <EntityTypeMapping TypeName="PaintTintingBaseModel.PaintProvider">
+              <MappingFragment StoreEntitySet="PaintProvider">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="PaintTintingBaseModel.User">
               <MappingFragment StoreEntitySet="User">

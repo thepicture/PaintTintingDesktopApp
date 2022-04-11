@@ -20,6 +20,8 @@ namespace PaintTintingDesktopApp.ViewModels
             DependencyService.Get<IMessageBoxService>();
         public ISessionService<User> SessionService =>
             DependencyService.Get<ISessionService<User>>();
+        public IBlenderService BlenderService =>
+           DependencyService.Get<IBlenderService>();
 
         private bool isBusy;
         public bool IsBusy
@@ -29,7 +31,8 @@ namespace PaintTintingDesktopApp.ViewModels
             {
                 if (SetProperty(ref isBusy, value))
                 {
-                    OnPropertyChanged(nameof(IsNotBusy));
+                    OnPropertyChanged(
+                        nameof(IsNotBusy));
                 }
             }
         }

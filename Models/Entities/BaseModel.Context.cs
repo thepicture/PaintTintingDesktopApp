@@ -25,6 +25,10 @@ namespace PaintTintingDesktopApp.Models.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Paint> Paint { get; set; }
+        public virtual DbSet<PaintProvider> PaintProvider { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserType> UserType { get; set; }
     }

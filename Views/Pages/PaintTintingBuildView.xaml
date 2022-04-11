@@ -13,8 +13,21 @@
         <viewmodels:PaintTintingBuildViewModel />
     </UserControl.DataContext>
     <Grid>
-        <colorpicker:StandardColorPicker x:Name="main"
-                                         Width="200"
-                                         Height="380" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Выберите цвет"
+                  Background="{Binding ColorAsHex}">
+            <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedColor, Mode=TwoWay}"
+                                             Width="200" />
+        </GroupBox>
+        <GroupBox Header="Для смешения требуется"
+                  Grid.Column="1">
+            <UniformGrid Columns="2">
+                <GroupBox Header="Первый цвет"></GroupBox>
+                <GroupBox Header="Второй цвет"></GroupBox>
+            </UniformGrid>
+        </GroupBox>
     </Grid>
 </UserControl>

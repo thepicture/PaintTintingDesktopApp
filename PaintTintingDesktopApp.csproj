@@ -114,6 +114,7 @@
     <Compile Include="Controls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Models\Constants\UserTypes.cs" />
     <Compile Include="Models\Entities\BaseModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +131,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Customer.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Order.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Paint.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\PaintProvider.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\User.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -140,7 +153,10 @@
     <Compile Include="Models\PartialModels\PartialUser.cs" />
     <Compile Include="Models\PartialModels\RegisterUser.cs" />
     <Compile Include="Models\Serialized\SerializedUser.cs" />
+    <Compile Include="Services\BlenderService.cs" />
     <Compile Include="Services\DependencyService.cs" />
+    <Compile Include="Services\IBlenderService.cs" />
+    <Compile Include="Services\IColourHarmoniesHelper.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\INavigationService.cs" />
