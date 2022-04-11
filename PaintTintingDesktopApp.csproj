@@ -154,9 +154,10 @@
     <Compile Include="Models\PartialModels\RegisterUser.cs" />
     <Compile Include="Models\Serialized\SerializedUser.cs" />
     <Compile Include="Services\BlenderService.cs" />
+    <Compile Include="Services\ClosestColorService.cs" />
     <Compile Include="Services\DependencyService.cs" />
     <Compile Include="Services\IBlenderService.cs" />
-    <Compile Include="Services\IColourHarmoniesHelper.cs" />
+    <Compile Include="Services\IClosestColorService.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\INavigationService.cs" />

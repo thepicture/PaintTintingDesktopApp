@@ -22,6 +22,8 @@ namespace PaintTintingDesktopApp.ViewModels
             DependencyService.Get<ISessionService<User>>();
         public IBlenderService BlenderService =>
            DependencyService.Get<IBlenderService>();
+        public IClosestColorService ClosestColorService =>
+          DependencyService.Get<IClosestColorService>();
 
         private bool isBusy;
         public bool IsBusy

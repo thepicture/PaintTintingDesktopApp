@@ -1,7 +1,9 @@
 ﻿using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -13,6 +15,7 @@ namespace PaintTintingDesktopApp.ViewModels
         public PaintTintingBuildViewModel()
         {
             Title = "Страница создания краски";
+            SearchTwoPaintingsAsync();
         }
 
         public SolidColorBrush ColorAsHex =>
@@ -45,7 +48,33 @@ namespace PaintTintingDesktopApp.ViewModels
                 using (PaintTintingBaseEntities entities =
                     new PaintTintingBaseEntities())
                 {
-                    string hex = ColorAsHex.ToString();
+                    List<Paint> paintings = entities.Paint.ToList();
+
+                    Color? firstClosestColor = ClosestColorService
+                    .GetClosestColor(
+                        paintings
+                        .Select(p => (Color)ColorConverter
+                        .ConvertFromString(p.ColorAsHex)),
+                            FirstTriadicColor);
+                    FirstFoundPaint = paintings.FirstOrDefault(p =>
+                    {
+                        return p.ColorAsHex.Contains(
+                            firstClosestColor.ToString()
+                                        .Substring(3));
+                    });
+
+                    Color? secondClosestColor = ClosestColorService
+                   .GetClosestColor(
+                       paintings
+                       .Select(p => (Color)ColorConverter
+                       .ConvertFromString(p.ColorAsHex)),
+                           SecondTriadicColor);
+                    SecondFoundPaint = paintings.FirstOrDefault(p =>
+                    {
+                        return p.ColorAsHex.Contains(
+                            secondClosestColor.ToString()
+                                        .Substring(3));
+                    });
                 }
             });
         }
@@ -83,6 +112,22 @@ namespace PaintTintingDesktopApp.ViewModels
 
         private async void MixColorsAsync()
         {
+        }
+
+        private Paint firstFoundPaint;
+
+        public Paint FirstFoundPaint
+        {
+            get => firstFoundPaint;
+            set => SetProperty(ref firstFoundPaint, value);
+        }
+
+        private Paint secondFoundPaint;
+
+        public Paint SecondFoundPaint
+        {
+            get => secondFoundPaint;
+            set => SetProperty(ref secondFoundPaint, value);
         }
     }
 }
