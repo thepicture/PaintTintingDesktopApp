@@ -53,6 +53,8 @@
                         Value="5" />
             </Style>
             <Style TargetType="colorpicker:StandardColorPicker">
+                <Setter Property="ShowAlpha"
+                        Value="False" />
                 <Style.Resources>
                         <Style TargetType="TabControl" />
                         <Style TargetType="TabItem" />

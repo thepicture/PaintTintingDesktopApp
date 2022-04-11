@@ -14,19 +14,30 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Выберите цвет"
-                  Background="{Binding ColorAsHex}">
-            <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedColor, Mode=TwoWay}"
-                                             Width="200" />
+        <GroupBox Header="Выберите цвет">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedColor, Mode=TwoWay}"/>
+                <Button Command="{Binding MixColorsCommand}"
+                        Content="Смешать"
+                        Grid.Row="1" />
+            </Grid>
         </GroupBox>
         <GroupBox Header="Для смешения требуется"
                   Grid.Column="1">
             <UniformGrid Columns="2">
-                <GroupBox Header="Первый цвет"></GroupBox>
-                <GroupBox Header="Второй цвет"></GroupBox>
+                <GroupBox Header="Первый цвет">
+                    <colorpicker:StandardColorPicker SelectedColor="{Binding FirstTriadicColor, Mode=TwoWay}" />
+                </GroupBox>
+                <GroupBox Header="Второй цвет">
+                    <colorpicker:StandardColorPicker SelectedColor="{Binding SecondTriadicColor, Mode=TwoWay}" />
+                </GroupBox>
             </UniformGrid>
         </GroupBox>
     </Grid>

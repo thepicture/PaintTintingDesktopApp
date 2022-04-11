@@ -22,6 +22,7 @@ namespace PaintTintingDesktopApp
             DependencyService.Register<LoginDataStore>();
             DependencyService.Register<RegisterDataStore>();
             DependencyService.Register<SessionService>();
+            DependencyService.Register<BlenderService>();
 
             DependencyService.Get<INavigationService<ViewModelBase>>()
                    .Navigate<LoginViewModel>();
