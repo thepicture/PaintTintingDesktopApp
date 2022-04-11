@@ -25,7 +25,13 @@ namespace PaintTintingDesktopApp.ViewModels
         public bool IsBusy
         {
             get => isBusy;
-            set => _ = SetProperty(ref isBusy, value);
+            set
+            {
+                if (SetProperty(ref isBusy, value))
+                {
+                    OnPropertyChanged(nameof(IsNotBusy));
+                }
+            }
         }
         public bool IsNotBusy => !IsBusy;
         private bool isRefreshing = false;

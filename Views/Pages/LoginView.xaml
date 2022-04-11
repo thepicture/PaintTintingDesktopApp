@@ -20,40 +20,47 @@
     <UserControl.DataContext>
         <viewmodels:LoginViewModel />
     </UserControl.DataContext>
-    <StackPanel Margin="60"
-                VerticalAlignment="Center">
-        <UniformGrid Columns="2">
-            <TextBlock Text="Логин"
-                       Style="{StaticResource CommonBlock}" />
-            <TextBox Text="{Binding User.Login}"
-                     materialDesign:HintAssist.Hint="Введите логин"
-                     Grid.Column="1" />
-        </UniformGrid>
-        <UniformGrid Columns="2">
-            <TextBlock Text="Пароль"
-                       Style="{StaticResource CommonBlock}" />
-            <controls:BindablePasswordBox BindablePassword="{Binding User.PlainPassword}"
-                                          materialDesign:HintAssist.Hint="Введите пароль"
-                                          Grid.Column="1" />
-        </UniformGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <CheckBox Grid.Column="1"
-                      Content="Запомнить"
-                      IsChecked="{Binding IsRememberMe}"/>
-        </Grid>
-        <UniformGrid Columns="2">
-            <Button Content="Авторизоваться" 
-                    Command="{Binding LoginCommand}"/>
-            <Button Content="Выйти"
-                    Command="{Binding ExitCommand}"
+    <Grid>
+        <ProgressBar IsIndeterminate="True"
+                     VerticalAlignment="Top"
+                     Width="50"
+                     Opacity="{Binding IsBusy}"/>
+        <StackPanel Margin="60"
+                    VerticalAlignment="Center">
+            <UniformGrid Columns="2">
+                <TextBlock Text="Логин"
+                           Style="{StaticResource CommonBlock}" />
+                <TextBox Text="{Binding User.Login}"
+                         materialDesign:HintAssist.Hint="Введите логин"
+                         Grid.Column="1" />
+            </UniformGrid>
+            <UniformGrid Columns="2">
+                <TextBlock Text="Пароль"
+                           Style="{StaticResource CommonBlock}" />
+                <controls:BindablePasswordBox BindablePassword="{Binding User.PlainPassword}"
+                                              materialDesign:HintAssist.Hint="Введите пароль"
+                                              Grid.Column="1" />
+            </UniformGrid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="1"
+                          Content="Запомнить"
+                          IsChecked="{Binding IsRememberMe}" />
+            </Grid>
+            <UniformGrid Columns="2">
+                <Button Content="Авторизоваться"
+                        Command="{Binding LoginCommand}" 
+                        IsEnabled="{Binding IsNotBusy}"/>
+                <Button Content="Выйти"
+                        Command="{Binding ExitCommand}"
+                        Grid.Column="1" />
+            </UniformGrid>
+            <Button Content="Ещё нет аккаунта?"
+                    Command="{Binding GoToRegisterPageCommand}"
                     Grid.Column="1" />
-        </UniformGrid>
-        <Button Content="Ещё нет аккаунта?"
-                Command="{Binding GoToRegisterPageCommand}"
-                Grid.Column="1" />
-    </StackPanel>
+        </StackPanel>
+    </Grid>
 </UserControl>

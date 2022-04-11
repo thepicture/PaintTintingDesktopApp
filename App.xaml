@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PaintTintingDesktopApp"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
              x:Class="PaintTintingDesktopApp.App"
              StartupUri="Views/Windows/NavigationWindow.xaml">
     <Application.Resources>
@@ -36,10 +37,23 @@
                 <Setter Property="Margin"
                         Value="5" />
             </Style>
+            <Style BasedOn="{StaticResource MaterialDesignCircularProgressBar}"
+                   TargetType="ProgressBar">
+                <Setter Property="Margin"
+                        Value="5" />
+            </Style>
             <Style BasedOn="{StaticResource MaterialDesignCheckBox}"
                    TargetType="CheckBox">
                 <Setter Property="Margin"
                         Value="5" />
+            </Style>
+            <Style TargetType="colorpicker:StandardColorPicker">
+                <Style.Resources>
+                        <Style TargetType="TabControl" />
+                        <Style TargetType="TabItem" />
+                        <Style TargetType="TextBox" />
+                        <Style TargetType="ComboBox" />
+                </Style.Resources>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

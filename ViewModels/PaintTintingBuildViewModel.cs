@@ -1,8 +1,9 @@
-﻿using PaintTintingDesktopApp.ViewModels;
-
-namespace PaintTintingDesktopApp.ViewModels
+﻿namespace PaintTintingDesktopApp.ViewModels
 {
     public class PaintTintingBuildViewModel : ViewModelBase
     {
+        public PaintTintingBuildViewModel()
+        {
+        }
     }
 }

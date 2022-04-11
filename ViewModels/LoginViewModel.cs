@@ -39,6 +39,7 @@ namespace PaintTintingDesktopApp.ViewModels
 
         private async void LoginAsync()
         {
+            IsBusy = true;
             if (await LoginDataStore.AddItemAsync(User))
             {
                 if (await LoginDataStore.GetItemAsync(User.Login) != null)
@@ -56,6 +57,7 @@ namespace PaintTintingDesktopApp.ViewModels
                 }
                 NavigationService.Navigate<PaintTintingBuildViewModel>();
             }
+            IsBusy = false;
         }
 
         private Command exitCommand;
