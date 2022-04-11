@@ -53,14 +53,17 @@
             <UniformGrid Columns="2">
                 <Button Content="Авторизоваться"
                         Command="{Binding LoginCommand}" 
-                        IsEnabled="{Binding IsNotBusy}"/>
+                        IsEnabled="{Binding IsNotBusy}"
+                        ToolTip="Авторизоваться в системе под введёнными логином и паролем"/>
                 <Button Content="Выйти"
                         Command="{Binding ExitCommand}"
-                        Grid.Column="1" />
+                        Grid.Column="1" 
+                        ToolTip="Завершить работу приложения"/>
             </UniformGrid>
             <Button Content="Ещё нет аккаунта?"
                     Command="{Binding GoToRegisterPageCommand}"
-                    Grid.Column="1" />
+                    Grid.Column="1" 
+                    ToolTip="Перейти на страницу регистрации"/>
         </StackPanel>
     </Grid>
 </UserControl>

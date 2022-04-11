@@ -52,6 +52,7 @@
                                           Grid.Column="1" />
         </UniformGrid>
         <Button Content="Зарегистрироваться"
-                Command="{Binding RegisterCommand}" />
+                Command="{Binding RegisterCommand}" 
+                ToolTip="Зарегистрироваться в системе с введёнными данными из полей"/>
     </StackPanel>
 </UserControl>

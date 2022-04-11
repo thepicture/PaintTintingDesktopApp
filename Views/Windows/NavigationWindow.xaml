@@ -42,7 +42,8 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Command="{Binding GoBackCommand}"
                     Content="Назад"
-                    Margin="5">
+                    Margin="5"
+                    ToolTip="Вернуться на предыдущую страницу">
                 <Button.Style>
                     <Style TargetType="Button"
                            BasedOn="{StaticResource MaterialDesignPaperButton}">
@@ -60,7 +61,8 @@
             </Button>
             <Button Command="{Binding ClearSessionCommand}"
                     Content="Завершить сессию"
-                    Margin="5">
+                    Margin="5"
+                    ToolTip="Завершить сессию и вернуться на страницу авторизации">
                 <Button.Style>
                     <Style TargetType="Button"
                            BasedOn="{StaticResource MaterialDesignPaperButton}">

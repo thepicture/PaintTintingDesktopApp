@@ -26,7 +26,8 @@
                 <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedColor, Mode=TwoWay}" />
                 <Button Command="{Binding MixColorsCommand}"
                         Content="Смешать"
-                        Grid.Row="1" />
+                        Grid.Row="1"
+                        ToolTip="Перейти на страницу смешения красок" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Для смешения требуется"
@@ -40,8 +41,8 @@
                         </Grid.RowDefinitions>
                         <colorpicker:StandardColorPicker SelectedColor="{Binding FirstTriadicColor, Mode=TwoWay}" />
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding FirstFoundPaint.ProductName, FallbackValue='Краска для смешения не найдена. Добавьте её'}" 
-                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding FirstFoundPaint.ProductName, FallbackValue='Краска для смешения не найдена. Добавьте её'}"
+                                       TextWrapping="Wrap" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock></TextBlock>
                             </StackPanel>
@@ -56,8 +57,8 @@
                         </Grid.RowDefinitions>
                         <colorpicker:StandardColorPicker SelectedColor="{Binding SecondTriadicColor, Mode=TwoWay}" />
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding SecondFoundPaint.ProductName, FallbackValue='Краска для смешения не найдена. Добавьте её'}" 
-                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding SecondFoundPaint.ProductName, FallbackValue='Краска для смешения не найдена. Добавьте её'}"
+                                       TextWrapping="Wrap" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock></TextBlock>
                             </StackPanel>
