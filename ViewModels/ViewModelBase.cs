@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace PaintTintingDesktopApp.ViewModels
 {
@@ -14,6 +15,8 @@ namespace PaintTintingDesktopApp.ViewModels
             DependencyService.Get<INavigationService<ViewModelBase>>();
         public IDataStore<LoginUser> LoginDataStore =>
            DependencyService.Get<IDataStore<LoginUser>>();
+        public IDataStore<Paint> PaintDataStore =>
+          DependencyService.Get<IDataStore<Paint>>();
         public IDataStore<RegisterUser> RegisterDataStore =>
            DependencyService.Get<IDataStore<RegisterUser>>();
         public IMessageBoxService MessageBoxService =>
@@ -47,6 +50,18 @@ namespace PaintTintingDesktopApp.ViewModels
         }
 
         private string title = string.Empty;
+
+        public ViewModelBase()
+        {
+            if (DesignerProperties.GetIsInDesignMode(
+                new DependencyObject()))
+            {
+                _ = typeof(App)
+                    .GetMethod("OnStartup")
+                    .Invoke(
+                        new App(), null);
+            }
+        }
 
         public string Title
         {

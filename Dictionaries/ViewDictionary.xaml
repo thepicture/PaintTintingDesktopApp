@@ -11,4 +11,7 @@
     <DataTemplate DataType="{x:Type viewmodels:PaintTintingBuildViewModel}">
         <views:PaintTintingBuildView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ColorMixViewModel}">
+        <views:ColorMixView />
+    </DataTemplate>
 </ResourceDictionary>

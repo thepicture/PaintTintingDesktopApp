@@ -2,9 +2,10 @@
 using PaintTintingDesktopApp.Models.Entities;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -39,6 +40,13 @@ namespace PaintTintingDesktopApp.ViewModels
 
         private async void SearchTwoPaintingsAsync()
         {
+            if (DesignerProperties.GetIsInDesignMode(
+                new DependencyObject()))
+            {
+                FirstTriadicColor = new Color();
+                secondTriadicColor = new Color();
+                return;
+            }
             ICollection<Color> triadicColors = BlenderService
                 .GetTriadicColors(SelectedColor);
             FirstTriadicColor = triadicColors.First();
@@ -48,7 +56,9 @@ namespace PaintTintingDesktopApp.ViewModels
                 using (PaintTintingBaseEntities entities =
                     new PaintTintingBaseEntities())
                 {
-                    List<Paint> paintings = entities.Paint.ToList();
+                    List<Paint> paintings = entities.Paint
+                        .Include(p => p.PaintProvider)
+                        .ToList();
 
                     Color? firstClosestColor = ClosestColorService
                     .GetClosestColor(
@@ -128,6 +138,26 @@ namespace PaintTintingDesktopApp.ViewModels
         {
             get => secondFoundPaint;
             set => SetProperty(ref secondFoundPaint, value);
+        }
+
+        private Command goToColorMixViewModelCommand;
+
+        public ICommand GoToColorMixViewModelCommand
+        {
+            get
+            {
+                if (goToColorMixViewModelCommand == null)
+                {
+                    goToColorMixViewModelCommand = new Command(GoToColorMixViewModel);
+                }
+
+                return goToColorMixViewModelCommand;
+            }
+        }
+
+        private void GoToColorMixViewModel()
+        {
+            NavigationService.Navigate<ColorMixViewModel>();
         }
     }
 }

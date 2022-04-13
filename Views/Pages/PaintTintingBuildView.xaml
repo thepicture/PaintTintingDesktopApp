@@ -7,6 +7,13 @@
              xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
              xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
              mc:Ignorable="d"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="750"
              d:DesignWidth="1000">
     <UserControl.DataContext>
@@ -24,10 +31,16 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedColor, Mode=TwoWay}" />
+                <StackPanel Grid.Row="1">
+                    
                 <Button Command="{Binding MixColorsCommand}"
-                        Content="Смешать"
-                        Grid.Row="1"
-                        ToolTip="Перейти на страницу смешения красок" />
+                        Content="Показать рецепт"
+                        ToolTip="Перейти на страницу рецептуры с возможностью печати этикетки и расчёта стоимости" />
+                    <Button Command="{Binding GoToColorMixViewModelCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Добавить новый пигмент"
+                            ToolTip="Перейти на страницу смешения красок" />
+                </StackPanel>
             </Grid>
         </GroupBox>
         <GroupBox Header="Для смешения требуется"
@@ -41,10 +54,15 @@
                         </Grid.RowDefinitions>
                         <colorpicker:StandardColorPicker SelectedColor="{Binding FirstTriadicColor, Mode=TwoWay}" />
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding FirstFoundPaint.ProductName, FallbackValue='Краска для смешения не найдена. Добавьте её'}"
-                                       TextWrapping="Wrap" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock></TextBlock>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FirstFoundPaint.ProductName,
+                                                          StringFormat='Название: {0}'}" />
+                                <TextBlock Text="{Binding FirstFoundPaint.PaintProvider.Title,
+                                                          StringFormat='Поставщик: {0}'}" />
+                                <TextBlock Text="{Binding FirstFoundPaint.PackagingInLiters,
+                                                          StringFormat='Количество: {0}L.'}" />
+                                <TextBlock Text="{Binding FirstFoundPaint.PriceInRubles,
+                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -57,10 +75,15 @@
                         </Grid.RowDefinitions>
                         <colorpicker:StandardColorPicker SelectedColor="{Binding SecondTriadicColor, Mode=TwoWay}" />
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding SecondFoundPaint.ProductName, FallbackValue='Краска для смешения не найдена. Добавьте её'}"
-                                       TextWrapping="Wrap" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock></TextBlock>
+                            <StackPanel>
+                                <TextBlock Text="{Binding SecondFoundPaint.ProductName,
+                                                          StringFormat='Название: {0}'}" />
+                                <TextBlock Text="{Binding SecondFoundPaint.PaintProvider.Title,
+                                                          StringFormat='Поставщик: {0}'}" />
+                                <TextBlock Text="{Binding SecondFoundPaint.PackagingInLiters,
+                                                          StringFormat='Количество: {0}L.'}" />
+                                <TextBlock Text="{Binding SecondFoundPaint.PriceInRubles,
+                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
                             </StackPanel>
                         </Grid>
                     </Grid>

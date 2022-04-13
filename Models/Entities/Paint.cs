@@ -18,6 +18,8 @@ namespace PaintTintingDesktopApp.Models.Entities
         public Paint()
         {
             this.Order = new HashSet<Order>();
+            this.Paint1 = new HashSet<Paint>();
+            this.Paint11 = new HashSet<Paint>();
         }
     
         public int Id { get; set; }
@@ -26,9 +28,17 @@ namespace PaintTintingDesktopApp.Models.Entities
         public int PaintProviderId { get; set; }
         public int PackagingInLiters { get; set; }
         public decimal PriceInRubles { get; set; }
+        public Nullable<int> FirstParentId { get; set; }
+        public Nullable<int> SecondParentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paint> Paint1 { get; set; }
+        public virtual Paint Paint2 { get; set; }
         public virtual PaintProvider PaintProvider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paint> Paint11 { get; set; }
+        public virtual Paint Paint3 { get; set; }
     }
 }

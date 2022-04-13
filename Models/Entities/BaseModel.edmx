@@ -29,10 +29,12 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ColorAsHex" Type="nvarchar" MaxLength="9" Nullable="false" />
-          <Property Name="ProductName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PaintProviderId" Type="int" Nullable="false" />
           <Property Name="PackagingInLiters" Type="int" Nullable="false" />
           <Property Name="PriceInRubles" Type="money" Nullable="false" />
+          <Property Name="FirstParentId" Type="int" />
+          <Property Name="SecondParentId" Type="int" />
         </EntityType>
         <EntityType Name="PaintProvider">
           <Key>
@@ -97,6 +99,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Paint_FirstParent">
+          <End Role="Paint" Type="Self.Paint" Multiplicity="0..1" />
+          <End Role="Paint1" Type="Self.Paint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paint1">
+              <PropertyRef Name="FirstParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Paint_PaintProvider">
           <End Role="PaintProvider" Type="Self.PaintProvider" Multiplicity="1" />
           <End Role="Paint" Type="Self.Paint" Multiplicity="*" />
@@ -106,6 +120,18 @@
             </Principal>
             <Dependent Role="Paint">
               <PropertyRef Name="PaintProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paint_SecondParent">
+          <End Role="Paint" Type="Self.Paint" Multiplicity="0..1" />
+          <End Role="Paint1" Type="Self.Paint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paint1">
+              <PropertyRef Name="SecondParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -140,9 +166,17 @@
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_Paint_FirstParent" Association="Self.FK_Paint_FirstParent">
+            <End Role="Paint" EntitySet="Paint" />
+            <End Role="Paint1" EntitySet="Paint" />
+          </AssociationSet>
           <AssociationSet Name="FK_Paint_PaintProvider" Association="Self.FK_Paint_PaintProvider">
             <End Role="PaintProvider" EntitySet="PaintProvider" />
             <End Role="Paint" EntitySet="Paint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paint_SecondParent" Association="Self.FK_Paint_SecondParent">
+            <End Role="Paint" EntitySet="Paint" />
+            <End Role="Paint1" EntitySet="Paint" />
           </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
             <End Role="UserType" EntitySet="UserType" />
@@ -172,9 +206,17 @@
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_Paint_FirstParent" Association="PaintTintingBaseModel.FK_Paint_FirstParent">
+            <End Role="Paint" EntitySet="Paint" />
+            <End Role="Paint1" EntitySet="Paint" />
+          </AssociationSet>
           <AssociationSet Name="FK_Paint_PaintProvider" Association="PaintTintingBaseModel.FK_Paint_PaintProvider">
             <End Role="PaintProvider" EntitySet="PaintProvider" />
             <End Role="Paint" EntitySet="Paint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paint_SecondParent" Association="PaintTintingBaseModel.FK_Paint_SecondParent">
+            <End Role="Paint" EntitySet="Paint" />
+            <End Role="Paint1" EntitySet="Paint" />
           </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="PaintTintingBaseModel.FK_User_UserType">
             <End Role="UserType" EntitySet="UserType" />
@@ -209,12 +251,18 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ColorAsHex" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PaintProviderId" Type="Int32" Nullable="false" />
           <Property Name="PackagingInLiters" Type="Int32" Nullable="false" />
           <Property Name="PriceInRubles" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FirstParentId" Type="Int32" />
+          <Property Name="SecondParentId" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="PaintTintingBaseModel.FK_Order_Paint" FromRole="Paint" ToRole="Order" />
+          <NavigationProperty Name="Paint1" Relationship="PaintTintingBaseModel.FK_Paint_FirstParent" FromRole="Paint" ToRole="Paint1" />
+          <NavigationProperty Name="Paint2" Relationship="PaintTintingBaseModel.FK_Paint_FirstParent" FromRole="Paint1" ToRole="Paint" />
           <NavigationProperty Name="PaintProvider" Relationship="PaintTintingBaseModel.FK_Paint_PaintProvider" FromRole="Paint" ToRole="PaintProvider" />
+          <NavigationProperty Name="Paint11" Relationship="PaintTintingBaseModel.FK_Paint_SecondParent" FromRole="Paint" ToRole="Paint1" />
+          <NavigationProperty Name="Paint3" Relationship="PaintTintingBaseModel.FK_Paint_SecondParent" FromRole="Paint1" ToRole="Paint" />
         </EntityType>
         <EntityType Name="PaintProvider">
           <Key>
@@ -283,6 +331,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Paint_FirstParent">
+          <End Type="PaintTintingBaseModel.Paint" Role="Paint" Multiplicity="0..1" />
+          <End Type="PaintTintingBaseModel.Paint" Role="Paint1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paint1">
+              <PropertyRef Name="FirstParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Paint_PaintProvider">
           <End Type="PaintTintingBaseModel.PaintProvider" Role="PaintProvider" Multiplicity="1" />
           <End Type="PaintTintingBaseModel.Paint" Role="Paint" Multiplicity="*" />
@@ -292,6 +352,18 @@
             </Principal>
             <Dependent Role="Paint">
               <PropertyRef Name="PaintProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paint_SecondParent">
+          <End Type="PaintTintingBaseModel.Paint" Role="Paint" Multiplicity="0..1" />
+          <End Type="PaintTintingBaseModel.Paint" Role="Paint1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paint1">
+              <PropertyRef Name="SecondParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -336,6 +408,8 @@
           <EntitySetMapping Name="Paint">
             <EntityTypeMapping TypeName="PaintTintingBaseModel.Paint">
               <MappingFragment StoreEntitySet="Paint">
+                <ScalarProperty Name="SecondParentId" ColumnName="SecondParentId" />
+                <ScalarProperty Name="FirstParentId" ColumnName="FirstParentId" />
                 <ScalarProperty Name="PriceInRubles" ColumnName="PriceInRubles" />
                 <ScalarProperty Name="PackagingInLiters" ColumnName="PackagingInLiters" />
                 <ScalarProperty Name="PaintProviderId" ColumnName="PaintProviderId" />

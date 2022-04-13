@@ -9,6 +9,13 @@
              xmlns:controls="clr-namespace:PaintTintingDesktopApp.Controls"
              d:DataContext="{d:DesignInstance Type=viewmodels:RegisterViewModel}"
              mc:Ignorable="d"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450"
              d:DesignWidth="800">
     <UserControl.DataContext>
