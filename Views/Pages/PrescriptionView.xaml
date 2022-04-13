@@ -76,7 +76,7 @@
             </UniformGrid>
         </GroupBox>
         <GroupBox Grid.Row="1"
-                  Header="Получившаяся смесь">
+                  Header="Этикетка">
             <Grid>
                 <StackPanel>
                     <StackPanel x:Name="PrintTarget">
@@ -110,10 +110,12 @@
             <StackPanel>
                 <Button CommandParameter="{Binding ElementName=PrintTarget}"
                     Command="{Binding PrintTagToPrinterCommand}"
-                        Content="Распечатать этикетку принтером" />
+                        Content="Распечатать этикетку принтером"
+                        ToolTip="Распечатать этикетку на физическом принтере"/>
                 <Button CommandParameter="{Binding ElementName=PrintTarget}"
                         Command="{Binding PrintTagToPdfCommand}"
-                        Content="Распечатать этикетку в .pdf" />
+                        Content="Распечатать этикетку в .pdf" 
+                        ToolTip="Распечатать этикетку в формате .pdf и сохранить в файл"/>
             </StackPanel>
         </GroupBox>
     </Grid>

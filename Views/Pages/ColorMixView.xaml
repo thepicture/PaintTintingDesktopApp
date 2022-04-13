@@ -40,7 +40,8 @@
                                 <ComboBox ItemsSource="{Binding Parents}"
                                           SelectedItem="{Binding ResultPaint.Paint2}"
                                           DisplayMemberPath="ProductName"
-                                          materialDesign:HintAssist.Hint="Выберите первый пигмент" />
+                                          materialDesign:HintAssist.Hint="Выберите первый пигмент"
+                                          ToolTip="Выберите первый пигмент для смешения"/>
                                 <TextBlock Text="{Binding ResultPaint.Paint2.ProductName,
                                                           StringFormat='Название: {0}'}" />
                                 <TextBlock Text="{Binding ResultPaint.Paint2.PaintProvider.Title,
@@ -67,7 +68,8 @@
                                 <ComboBox ItemsSource="{Binding Parents}"
                                           SelectedItem="{Binding ResultPaint.Paint3}"
                                           DisplayMemberPath="ProductName"
-                                          materialDesign:HintAssist.Hint="Выберите второй пигмент" />
+                                          materialDesign:HintAssist.Hint="Выберите второй пигмент"
+                                          ToolTip="Выберите второй пигмент для смешения"/>
                                 <TextBlock Text="{Binding ResultPaint.Paint3.ProductName,
                                                           StringFormat='Название: {0}'}" />
                                 <TextBlock Text="{Binding ResultPaint.Paint3.PaintProvider.Title,
@@ -90,18 +92,20 @@
                                               IsHitTestVisible="False"
                                               Height="150" />
                     <TextBox Text="{Binding ResultPaint.ProductName}"
-                             materialDesign:HintAssist.Hint="* Название" />
+                             materialDesign:HintAssist.Hint="* Название"/>
                     <ComboBox ItemsSource="{Binding Providers}"
                               SelectedItem="{Binding ResultPaint.PaintProvider}"
                               DisplayMemberPath="Title"
-                              materialDesign:HintAssist.Hint="* Поставщик" />
+                              materialDesign:HintAssist.Hint="* Поставщик" 
+                              ToolTip="Выберите поставщика"/>
                     <TextBox Text="{Binding ResultPaint.PackagingInLiters}"
                              materialDesign:HintAssist.HelperText="* Количество в литрах"/>
                     <TextBox Text="{Binding ResultPaint.PriceInRubles}"
                              materialDesign:HintAssist.HelperText="* Стоимость в рублях"/>
                     <Button Command="{Binding SavePaintingCommand}"
                             Margin="5 20 5 5"
-                            Content="Сохранить пигмент" />
+                            Content="Сохранить пигмент"
+                            ToolTip="Сохранить пигмент в базу данных"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
