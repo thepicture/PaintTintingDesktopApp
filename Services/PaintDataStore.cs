@@ -24,10 +24,6 @@ namespace PaintTintingDesktopApp.Services
             {
                 _ = errors.AppendLine("Введите название пигмента");
             }
-            if (string.IsNullOrWhiteSpace(item.ProductName))
-            {
-                _ = errors.AppendLine("Введите название пигмента");
-            }
             if (item.PaintProvider == null)
             {
                 _ = errors.AppendLine("Укажите поставщика");
