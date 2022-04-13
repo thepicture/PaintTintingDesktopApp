@@ -31,7 +31,7 @@
           <Property Name="ColorAsHex" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PaintProviderId" Type="int" Nullable="false" />
-          <Property Name="PackagingInLiters" Type="int" Nullable="false" />
+          <Property Name="PackagingInLiters" Type="decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="PriceInRubles" Type="money" Nullable="false" />
           <Property Name="FirstParentId" Type="int" />
           <Property Name="SecondParentId" Type="int" />
@@ -253,7 +253,7 @@
           <Property Name="ColorAsHex" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
           <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PaintProviderId" Type="Int32" Nullable="false" />
-          <Property Name="PackagingInLiters" Type="Int32" Nullable="false" />
+          <Property Name="PackagingInLiters" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
           <Property Name="PriceInRubles" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="FirstParentId" Type="Int32" />
           <Property Name="SecondParentId" Type="Int32" />

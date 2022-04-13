@@ -105,25 +105,6 @@ namespace PaintTintingDesktopApp.ViewModels
             set => SetProperty(ref secondTriadicColor, value);
         }
 
-        private Command mixColorsCommand;
-
-        public ICommand MixColorsCommand
-        {
-            get
-            {
-                if (mixColorsCommand == null)
-                {
-                    mixColorsCommand = new Command(MixColorsAsync);
-                }
-
-                return mixColorsCommand;
-            }
-        }
-
-        private async void MixColorsAsync()
-        {
-        }
-
         private Paint firstFoundPaint;
 
         public Paint FirstFoundPaint
@@ -148,7 +129,8 @@ namespace PaintTintingDesktopApp.ViewModels
             {
                 if (goToColorMixViewModelCommand == null)
                 {
-                    goToColorMixViewModelCommand = new Command(GoToColorMixViewModel);
+                    goToColorMixViewModelCommand
+                        = new Command(GoToColorMixViewModel);
                 }
 
                 return goToColorMixViewModelCommand;
@@ -158,6 +140,39 @@ namespace PaintTintingDesktopApp.ViewModels
         private void GoToColorMixViewModel()
         {
             NavigationService.Navigate<ColorMixViewModel>();
+        }
+
+        private Command goToPrescriptionViewModelCommand;
+
+        public ICommand GoToPrescriptionViewModelCommand
+        {
+            get
+            {
+                if (goToPrescriptionViewModelCommand == null)
+                {
+                    goToPrescriptionViewModelCommand
+                        = new Command(GoToPrescriptionViewModel);
+                }
+
+                return goToPrescriptionViewModelCommand;
+            }
+        }
+
+        private void GoToPrescriptionViewModel()
+        {
+            NavigationService.NavigateWithParameter
+                <PrescriptionViewModel, List<Paint>>(new List<Paint>
+            {
+                new Paint
+                {
+                    ColorAsHex = "#"
+                    + SelectedColor.R.ToString("x2")
+                    + SelectedColor.G.ToString("x2")
+                    + selectedColor.B.ToString("x2")
+                },
+                FirstFoundPaint,
+                SecondFoundPaint
+            });
         }
     }
 }

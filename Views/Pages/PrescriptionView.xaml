@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="PaintTintingDesktopApp.Views.Pages.PrescriptionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PaintTintingDesktopApp.Views.Pages"
+             xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
+             xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PrescriptionViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="850"
+             d:DesignWidth="800"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Рецептура"
+                  Grid.Column="1">
+            <UniformGrid Columns="2">
+                <GroupBox Header="Первый цвет">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <colorpicker:SquarePicker SelectedColor="{Binding FirstPaint.ColorAsHex}"
+                                                  IsHitTestVisible="False"
+                                                  Height="100" />
+                        <Grid Grid.Row="1">
+                            <StackPanel>
+                                <TextBlock Text="{Binding FirstPaint.ProductName,
+                                                          StringFormat='Название: {0}'}" />
+                                <TextBlock Text="{Binding FirstPaint.PaintProvider.Title,
+                                                          StringFormat='Поставщик: {0}'}" />
+                                <TextBlock Text="{Binding FirstPaint.PackagingInLiters,
+                                                          StringFormat='Количество: {0}L.'}" />
+                                <TextBlock Text="{Binding FirstPaint.PriceInRubles,
+                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Второй цвет">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <colorpicker:SquarePicker SelectedColor="{Binding ResultPaint.Paint3.ColorAsHex}"
+                                                  IsHitTestVisible="False"
+                                                  Height="100" />
+                        <Grid Grid.Row="1">
+                            <StackPanel>
+                                <TextBlock Text="{Binding SecondPaint.ProductName,
+                                                          StringFormat='Название: {0}'}" />
+                                <TextBlock Text="{Binding SecondPaint.PaintProvider.Title,
+                                                          StringFormat='Поставщик: {0}'}" />
+                                <TextBlock Text="{Binding SecondPaint.PackagingInLiters,
+                                                          StringFormat='Количество: {0}L.'}" />
+                                <TextBlock Text="{Binding SecondPaint.PriceInRubles,
+                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </UniformGrid>
+        </GroupBox>
+        <GroupBox Grid.Row="1"
+                  Header="Получившаяся смесь">
+            <Grid>
+                <StackPanel>
+                    <StackPanel x:Name="PrintTarget">
+                        <colorpicker:SquarePicker SelectedColor="{Binding ResultPaint.ColorAsHex}"
+                                                  IsHitTestVisible="False"
+                                                  Height="150" />
+                        <Rectangle Fill="{Binding ResultPaint.ColorAsHex}"
+                                   Width="50"
+                                   Height="50"
+                                   Margin="5" 
+                                   StrokeThickness="1"
+                                   Stroke="Black"/>
+                        <TextBlock Text="{Binding ColorName, StringFormat='Цвет: {0}'}"
+                                   Style="{StaticResource CommonBlock}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource CommonBlock}"
+                               HorizontalAlignment="Left">
+                        <TextBlock.Inlines>
+                            <Run Text="ИТОГО:"
+                                 FontWeight="Bold" />
+                            <Run Text="{Binding TotalPrice, StringFormat={}{0:F0} РУБ.}" />
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2"
+                  Header="Действия">
+            <StackPanel>
+                <Button CommandParameter="{Binding ElementName=PrintTarget}"
+                    Command="{Binding PrintTagToPrinterCommand}"
+                        Content="Распечатать этикетку принтером" />
+                <Button CommandParameter="{Binding ElementName=PrintTarget}"
+                        Command="{Binding PrintTagToPdfCommand}"
+                        Content="Распечатать этикетку в .pdf" />
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

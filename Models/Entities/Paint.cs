@@ -26,7 +26,7 @@ namespace PaintTintingDesktopApp.Models.Entities
         public string ColorAsHex { get; set; }
         public string ProductName { get; set; }
         public int PaintProviderId { get; set; }
-        public int PackagingInLiters { get; set; }
+        public decimal PackagingInLiters { get; set; }
         public decimal PriceInRubles { get; set; }
         public Nullable<int> FirstParentId { get; set; }
         public Nullable<int> SecondParentId { get; set; }

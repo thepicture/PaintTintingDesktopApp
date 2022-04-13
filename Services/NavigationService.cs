@@ -49,7 +49,7 @@ namespace PaintTintingDesktopApp.Services
         {
             Journal.Push(
                 (ViewModelBase)
-                Activator.CreateInstance(typeof(TParam),
+                Activator.CreateInstance(typeof(TWhere),
                                          new object[] { param }));
         }
 

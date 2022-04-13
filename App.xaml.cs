@@ -15,6 +15,27 @@ namespace PaintTintingDesktopApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            try
+            {
+                using (PaintTintingBaseEntities entities
+                    = new PaintTintingBaseEntities())
+                {
+                    entities.Database.Connection.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = new MessageBoxService()
+                    .InformErrorAsync("Запуск приложения "
+                    + "невозможен, так как "
+                    + "база данных недоступна. "
+                    + "Проверьте подключение "
+                    + "и перезапустите приложение. Stack trace: "
+                    + ex.StackTrace);
+                App.Current.Shutdown();
+                return;
+            }
+
             base.OnStartup(e);
             DependencyService.Register<NavigationService>();
             DependencyService.Register<PasswordHashService>();

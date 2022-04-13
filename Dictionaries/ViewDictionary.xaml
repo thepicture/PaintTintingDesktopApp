@@ -9,9 +9,12 @@
         <views:RegisterView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:PaintTintingBuildViewModel}">
-        <views:PaintTintingBuildView/>
+        <views:PaintTintingBuildView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:ColorMixViewModel}">
         <views:ColorMixView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:PrescriptionViewModel}">
+        <views:PrescriptionView />
     </DataTemplate>
 </ResourceDictionary>
