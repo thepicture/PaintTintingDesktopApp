@@ -25,15 +25,14 @@ namespace PaintTintingDesktopApp
             }
             catch (Exception ex)
             {
-                _ = new MessageBoxService()
+                new MessageBoxService()
                     .InformErrorAsync("Запуск приложения "
                     + "невозможен, так как "
                     + "база данных недоступна. "
                     + "Проверьте подключение "
                     + "и перезапустите приложение. Stack trace: "
-                    + ex.StackTrace);
-                App.Current.Shutdown();
-                return;
+                    + ex.StackTrace)
+                        .Wait();
             }
 
             base.OnStartup(e);
