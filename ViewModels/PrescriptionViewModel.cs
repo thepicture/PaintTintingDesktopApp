@@ -3,7 +3,6 @@ using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
@@ -77,7 +76,8 @@ namespace PaintTintingDesktopApp.ViewModels
             {
                 if (printTagToPrinterCommand == null)
                 {
-                    printTagToPrinterCommand = new Command(PrintTagToPrinterAsync);
+                    printTagToPrinterCommand =
+                        new Command(PrintTagToPrinterAsync);
                 }
 
                 return printTagToPrinterCommand;
@@ -91,8 +91,7 @@ namespace PaintTintingDesktopApp.ViewModels
             if (printers.Count == 0)
             {
                 await MessageBoxService.InformErrorAsync(
-                    "Не подключен принтер. "
-                    + "Печать отменена");
+                    "Не подключен принтер. Печать отменена");
                 return;
             }
             string selectedPrinterName = null;
@@ -107,17 +106,20 @@ namespace PaintTintingDesktopApp.ViewModels
             }
             if (string.IsNullOrWhiteSpace(selectedPrinterName))
             {
-                await MessageBoxService.InformErrorAsync("Вы не выбрали " +
-                    "ни одного принтера. Печать отменена");
+                await MessageBoxService.WarnAsync(
+                    "Вы не выбрали принтер. Печать отменена");
                 return;
             }
             PrintDocument printDocument = new PrintDocument();
             printDocument.PrinterSettings.PrinterName = selectedPrinterName;
-            printDocument.EndPrint += delegate (object sender, PrintEventArgs e)
+            printDocument.EndPrint += async delegate (object sender,
+                                                      PrintEventArgs e)
             {
-                MessageBoxService.InformAsync("Этикетка отправлена на печать");
+                await MessageBoxService
+                    .InformAsync("Этикетка отправлена на печать");
             };
-            printDocument.PrintPage += delegate (object sender, PrintPageEventArgs e)
+            printDocument.PrintPage += delegate (object sender,
+                                                 PrintPageEventArgs e)
             {
                 RenderTargetBitmap bitmap = new RenderTargetBitmap(
                     (int)((FrameworkElement)parameter).ActualWidth,
@@ -132,7 +134,8 @@ namespace PaintTintingDesktopApp.ViewModels
                 using (MemoryStream stream = new MemoryStream())
                 {
                     encoder.Save(stream);
-                    System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
+                    System.Drawing.Image image = System.Drawing.Image
+                        .FromStream(stream);
                     e.Graphics.DrawImage(image, new PointF(0, 0));
                 };
             };
@@ -142,9 +145,8 @@ namespace PaintTintingDesktopApp.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-                await MessageBoxService.InformErrorAsync("Не удалось распечатать. " +
-                    "Причина: " + ex.StackTrace);
+                await MessageBoxService.InformErrorAsync(
+                    "Не удалось распечатать. Причина: " + ex);
             }
         }
 
