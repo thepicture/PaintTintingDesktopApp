@@ -4,9 +4,9 @@ namespace PaintTintingDesktopApp.Services
 {
     public interface IMessageBoxService
     {
-        Task InformAsync(string information);
-        Task WarnAsync(string warning);
-        Task<bool> AskAsync(string question);
-        Task InformErrorAsync(string error);
+        Task InformAsync(object information);
+        Task WarnAsync(object warning);
+        Task<bool> AskAsync(object question);
+        Task InformErrorAsync(object error);
     }
 }

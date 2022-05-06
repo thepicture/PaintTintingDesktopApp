@@ -5,11 +5,12 @@ namespace PaintTintingDesktopApp.Services
 {
     public class MessageBoxService : IMessageBoxService
     {
-        public async Task<bool> AskAsync(string question)
+        public async Task<bool> AskAsync(object question)
         {
+            string questionAsString = question.ToString();
             return await Task.Run(() =>
             {
-                return MessageBox.Show(question,
+                return MessageBox.Show(questionAsString,
                                        "Вопрос",
                                        MessageBoxButton.YesNo,
                                        MessageBoxImage.Question)
@@ -17,36 +18,39 @@ namespace PaintTintingDesktopApp.Services
             });
         }
 
-        public async Task InformAsync(string information)
+        public async Task InformAsync(object information)
         {
+            string informationAsString = information.ToString();
             await Task.Run(() =>
             {
-                _ = MessageBox.Show(information,
+                return MessageBox.Show(informationAsString,
                                 "Информация",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
             });
         }
 
-        public async Task InformErrorAsync(string error)
+        public async Task InformErrorAsync(object error)
         {
+            string errorAsString = error.ToString();
             await Task.Run(() =>
             {
-                _ = MessageBox.Show(error,
+                return MessageBox.Show(errorAsString,
                                 "Ошибка",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             });
         }
 
-        public async Task WarnAsync(string warning)
+        public async Task WarnAsync(object warning)
         {
+            string warningAsString = warning.ToString();
             await Task.Run(() =>
             {
-                _ = MessageBox.Show(warning,
-                                "Предупреждение",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Warning);
+                return MessageBox.Show(warningAsString,
+                                       "Предупреждение",
+                                       MessageBoxButton.OK,
+                                       MessageBoxImage.Warning);
             });
         }
     }

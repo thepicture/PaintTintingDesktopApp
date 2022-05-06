@@ -42,8 +42,7 @@ namespace PaintTintingDesktopApp.Services
             {
                 await DependencyService
                     .Get<IMessageBoxService>()
-                    .InformErrorAsync(
-                    errors.ToString());
+                    .InformErrorAsync(errors);
                 return false;
             }
             item.FirstParentId = item.Paint2.Id;

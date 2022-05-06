@@ -8,7 +8,9 @@ namespace PaintTintingDesktopApp.Services
         public ICollection<Color> GetTriadicColors(
             Color color)
         {
-            string hexadecimalColor = color.ToString().Substring(3);
+            string hexadecimalColor = color
+                .ToString()
+                .Substring(3);
             string r = hexadecimalColor.Substring(0, 2);
             string g = hexadecimalColor.Substring(2, 2);
             string b = hexadecimalColor.Substring(4, 2);

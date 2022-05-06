@@ -26,8 +26,7 @@ namespace PaintTintingDesktopApp.Services
             {
                 await DependencyService
                     .Get<IMessageBoxService>()
-                    .InformErrorAsync(
-                    errors.ToString());
+                    .InformErrorAsync(errors);
                 return false;
             }
             bool isAuthenticated = await Task.Run(() =>
