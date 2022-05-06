@@ -19,14 +19,6 @@ namespace PaintTintingDesktopApp.ViewModels
             set => SetProperty(ref user, value);
         }
 
-        private string password;
-
-        public string Password
-        {
-            get => password;
-            set => SetProperty(ref password, value);
-        }
-
         private Command registerCommand;
 
         public ICommand RegisterCommand
