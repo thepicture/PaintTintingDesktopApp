@@ -21,6 +21,10 @@ namespace PaintTintingDesktopApp
                     = new PaintTintingBaseEntities())
                 {
                     entities.Database.Connection.Open();
+                    if (!entities.User.Any(u => u.Login == "seller"))
+                    {
+                        InsertUser(entities);
+                    }
                 }
             }
             catch (Exception ex)
@@ -56,32 +60,28 @@ namespace PaintTintingDesktopApp
             }
         }
 
-        void InsertUser()
+        void InsertUser(PaintTintingBaseEntities entities)
         {
-            using (PaintTintingBaseEntities entities =
-                new PaintTintingBaseEntities())
+            byte[] salt = Guid
+                .NewGuid()
+                .ToByteArray()
+                .Take(16)
+                .ToArray();
+            byte[] passwordHash = DependencyService
+                .Get<IPasswordHashService>()
+                .GetHash("123", salt);
+            User user = new User
             {
-                byte[] salt = Guid
-                    .NewGuid()
-                    .ToByteArray()
-                    .Take(16)
-                    .ToArray();
-                byte[] passwordHash = DependencyService
-                    .Get<IPasswordHashService>()
-                    .GetHash("123", salt);
-                User user = new User
-                {
-                    UserType = entities.UserType.First(t => t.Title == "Продавец"),
-                    LastName = "Иванов",
-                    FirstName = "Иван",
-                    Patronymic = "Иванович",
-                    Login = "seller",
-                    PasswordHash = passwordHash,
-                    Salt = salt
-                };
-                _ = entities.User.Add(user);
-                _ = entities.SaveChanges();
-            }
+                UserType = entities.UserType.First(t => t.Title == "Продавец"),
+                LastName = "Иванов",
+                FirstName = "Иван",
+                Patronymic = "Иванович",
+                Login = "seller",
+                PasswordHash = passwordHash,
+                Salt = salt
+            };
+            _ = entities.User.Add(user);
+            _ = entities.SaveChanges();
         }
     }
 }
