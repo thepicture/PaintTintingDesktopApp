@@ -22,23 +22,26 @@ namespace PaintTintingDesktopApp.Services
 
             set
             {
-                if (value == null)
-                {
-                    Settings.Default.UserBase64 = string.Empty;
-                    Settings.Default.Save();
-                    return;
-                }
-                string userBase64 = Convert.ToBase64String(
-              Encoding.UTF8.GetBytes(
-                  JsonConvert.SerializeObject(value, new JsonSerializerSettings
-                  {
-                      ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                  })));
+                string serializedUser = JsonConvert
+                    .SerializeObject(value, new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+                byte[] serializedUserBytes = Encoding.UTF8.GetBytes(
+                                  serializedUser);
+                string userBase64 = Convert.ToBase64String(serializedUserBytes);
                 Settings.Default.UserBase64 = userBase64;
                 Settings.Default.Save();
             }
         }
 
         public User TemporaryIdentity { get; set; }
+
+        public void Abandon()
+        {
+            Settings.Default.UserBase64 = string.Empty;
+            Settings.Default.Save();
+            TemporaryIdentity = null;
+        }
     }
 }

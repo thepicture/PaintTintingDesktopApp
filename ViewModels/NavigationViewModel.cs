@@ -73,8 +73,7 @@ namespace PaintTintingDesktopApp.ViewModels
             if (await MessageBoxService.AskAsync("Завершить сессию "
                     + "и вернуться на страницу авторизации?"))
             {
-                SessionService.PermanentIdentity = null;
-                SessionService.TemporaryIdentity = null;
+                SessionService.Abandon();
                 NavigationService.NavigateToRoot();
             }
         }
