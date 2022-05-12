@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:PaintTintingDesktopApp.Views.Pages"
              xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
              xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PaintTintingBuildViewModel}"
              mc:Ignorable="d"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
@@ -21,7 +22,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Выберите цвет">
+        <GroupBox Header="{Tr 'SelectColor'}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -31,19 +32,19 @@
                 <StackPanel Grid.Row="1">
                     
                 <Button Command="{Binding GoToPrescriptionViewModelCommand}"
-                        Content="Показать рецептуру"
-                        ToolTip="Перейти на страницу рецептуры с возможностью печати этикетки и расчёта стоимости" />
+                        Content="{Tr 'ShowReceipt'}"
+                            ToolTip="{Tr 'ShowReceipt'}" />
                     <Button Command="{Binding GoToColorMixViewModelCommand}"
                             Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="Добавить новый пигмент"
-                            ToolTip="Перейти на страницу смешения красок" />
+                            Content="{Tr 'AddNewColor'}"
+                            ToolTip="{Tr 'AddNewColor'}" />
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Для смешения требуется"
+        <GroupBox Header="{Tr 'For Mix Required'}"
                   Grid.Column="1">
             <UniformGrid Columns="2">
-                <GroupBox Header="Первый цвет">
+                <GroupBox Header="{Tr 'First Color'}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -52,19 +53,27 @@
                         <colorpicker:StandardColorPicker SelectedColor="{Binding FirstTriadicColor, Mode=TwoWay}" />
                         <Grid Grid.Row="1">
                             <StackPanel>
-                                <TextBlock Text="{Binding FirstFoundPaint.ProductName,
-                                                          StringFormat='Название: {0}'}" />
-                                <TextBlock Text="{Binding FirstFoundPaint.PaintProvider.Title,
-                                                          StringFormat='Поставщик: {0}'}" />
-                                <TextBlock Text="{Binding FirstFoundPaint.PackagingInLiters,
-                                                          StringFormat='Количество: {0}L.'}" />
-                                <TextBlock Text="{Binding FirstFoundPaint.PriceInRubles,
-                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Product Name'}"/>
+                                    <TextBlock Text="{Binding FirstFoundPaint.ProductName}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Paint Provider'}" />
+                                    <TextBlock Text="{Binding FirstFoundPaint.PaintProvider}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Packaging In Liters'}" />
+                                    <TextBlock Text="{Binding FirstFoundPaint.PackagingInLiters, StringFormat='{}{0}L.'}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Price In Rubles'}" />
+                                    <TextBlock Text="{Binding FirstFoundPaint.PriceInRubles, StringFormat={}{0:F0} руб.}" />
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Второй цвет">
+                <GroupBox Header="{Tr 'Second Color'}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -73,14 +82,22 @@
                         <colorpicker:StandardColorPicker SelectedColor="{Binding SecondTriadicColor, Mode=TwoWay}" />
                         <Grid Grid.Row="1">
                             <StackPanel>
-                                <TextBlock Text="{Binding SecondFoundPaint.ProductName,
-                                                          StringFormat='Название: {0}'}" />
-                                <TextBlock Text="{Binding SecondFoundPaint.PaintProvider.Title,
-                                                          StringFormat='Поставщик: {0}'}" />
-                                <TextBlock Text="{Binding SecondFoundPaint.PackagingInLiters,
-                                                          StringFormat='Количество: {0}L.'}" />
-                                <TextBlock Text="{Binding SecondFoundPaint.PriceInRubles,
-                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Product Name'}" />
+                                    <TextBlock Text="{Binding SecondFoundPaint.ProductName}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Paint Provider'}" />
+                                    <TextBlock Text="{Binding SecondFoundPaint.PaintProvider}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Packaging In Liters'}" />
+                                    <TextBlock Text="{Binding SecondFoundPaint.PackagingInLiters, StringFormat='{}{0}L.'}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Price In Rubles'}" />
+                                    <TextBlock Text="{Binding SecondFoundPaint.PriceInRubles, StringFormat={}{0:F0} руб.}" />
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>

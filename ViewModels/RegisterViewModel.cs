@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Commands;
+﻿using CodingSeb.Localization;
+using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.PartialModels;
 using System.Windows.Input;
 
@@ -10,7 +11,8 @@ namespace PaintTintingDesktopApp.ViewModels
 
         public RegisterViewModel()
         {
-            Title = "Страница регистрации";
+            Title = Loc.Tr(
+                GetType().Name);
         }
 
         public RegisterUser User

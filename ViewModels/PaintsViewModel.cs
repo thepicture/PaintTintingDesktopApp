@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Models.Entities;
+﻿using CodingSeb.Localization;
+using PaintTintingDesktopApp.Models.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace PaintTintingDesktopApp.ViewModels
     {
         public PaintsViewModel()
         {
-            Title = "Просмотр каталога цвета";
+            Title = Loc.Tr(
+                GetType().Name);
         }
 
         public async void LoadPaintsAsync()

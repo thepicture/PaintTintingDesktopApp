@@ -24,10 +24,10 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <GroupBox Header="Рецептура"
+        <GroupBox Header="{Tr 'Prescription'}"
                   Grid.Column="1">
             <UniformGrid Columns="2">
-                <GroupBox Header="Первый цвет">
+                <GroupBox Header="{Tr 'First Color'}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -38,19 +38,27 @@
                                                   Height="100" />
                         <Grid Grid.Row="1">
                             <StackPanel>
-                                <TextBlock Text="{Binding FirstPaint.ProductName,
-                                                          StringFormat='Название: {0}'}" />
-                                <TextBlock Text="{Binding FirstPaint.PaintProvider.Title,
-                                                          StringFormat='Поставщик: {0}'}" />
-                                <TextBlock Text="{Binding FirstPaint.PackagingInLiters,
-                                                          StringFormat='Количество: {0}L.'}" />
-                                <TextBlock Text="{Binding FirstPaint.PriceInRubles,
-                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Product Name'}" />
+                                    <TextBlock Text="{Binding FirstPaint.ProductName}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Paint Provider'}" />
+                                    <TextBlock Text="{Binding FirstPaint.PaintProvider.Title}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Packaging In Liters'}" />
+                                    <TextBlock Text="{Binding FirstPaint.PackagingInLiters, StringFormat='{}{0}L.'}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Price In Rubles'}" />
+                                    <TextBlock Text="{Binding FirstPaint.PriceInRubles, StringFormat={}{0:F0} руб.}" />
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Второй цвет">
+                <GroupBox Header="{Tr 'Second Color'}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -61,14 +69,22 @@
                                                   Height="100" />
                         <Grid Grid.Row="1">
                             <StackPanel>
-                                <TextBlock Text="{Binding SecondPaint.ProductName,
-                                                          StringFormat='Название: {0}'}" />
-                                <TextBlock Text="{Binding SecondPaint.PaintProvider.Title,
-                                                          StringFormat='Поставщик: {0}'}" />
-                                <TextBlock Text="{Binding SecondPaint.PackagingInLiters,
-                                                          StringFormat='Количество: {0}L.'}" />
-                                <TextBlock Text="{Binding SecondPaint.PriceInRubles,
-                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Product Name'}" />
+                                    <TextBlock Text="{Binding SecondPaint.ProductName}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Paint Provider'}" />
+                                    <TextBlock Text="{Binding SecondPaint.PaintProvider.Title}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Packaging In Liters'}" />
+                                    <TextBlock Text="{Binding SecondPaint.PackagingInLiters, StringFormat='{}{0}L.'}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Price In Rubles'}" />
+                                    <TextBlock Text="{Binding SecondPaint.PriceInRubles, StringFormat={}{0:F0} руб.}" />
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -76,7 +92,7 @@
             </UniformGrid>
         </GroupBox>
         <GroupBox Grid.Row="1"
-                  Header="Этикетка">
+                  Header="{Tr 'Ticket'}">
             <Grid>
                 <StackPanel>
                     <StackPanel x:Name="PrintTarget">
@@ -86,36 +102,41 @@
                         <Rectangle Fill="{Binding ResultPaint.ColorAsHex}"
                                    Width="50"
                                    Height="50"
-                                   Margin="5" 
+                                   Margin="5"
                                    StrokeThickness="1"
-                                   Stroke="Black"/>
-                        <TextBlock Text="{Binding ColorName, StringFormat='Цвет: {0}'}"
+                                   Stroke="Black" />
+                        <TextBlock Text="{Binding ColorName}"
                                    Style="{StaticResource CommonBlock}"
                                    HorizontalAlignment="Center"
-                                   TextAlignment="Center"/>
+                                   TextAlignment="Center" />
                     </StackPanel>
-                    <TextBlock Style="{StaticResource CommonBlock}"
-                               HorizontalAlignment="Left">
-                        <TextBlock.Inlines>
-                            <Run Text="ИТОГО:"
-                                 FontWeight="Bold" />
-                            <Run Text="{Binding TotalPrice, StringFormat={}{0:F0} РУБ.}" />
-                        </TextBlock.Inlines>
-                    </TextBlock>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left">
+                        <TextBlock Text="{Tr 'ResultPrice'}"
+                                   FontWeight="Bold"
+                                   Style="{StaticResource CommonBlock}" />
+                        <TextBlock Style="{StaticResource CommonBlock}">
+                            <TextBlock.Inlines>
+                                <Run Text="{Binding TotalPrice, StringFormat={}{0:F0}}" />
+                            </TextBlock.Inlines>
+                        </TextBlock>
+                        <TextBlock Text="{Tr 'Rubles'}"
+                                   Style="{StaticResource CommonBlock}" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2"
-                  Header="Действия">
+                  Header="{Tr 'Actions'}">
             <StackPanel>
                 <Button CommandParameter="{Binding ElementName=PrintTarget}"
-                    Command="{Binding PrintTagToPrinterCommand}"
-                        Content="Распечатать этикетку принтером"
-                        ToolTip="Распечатать этикетку на физическом принтере"/>
+                        Command="{Binding PrintTagToPrinterCommand}"
+                        Content="{Tr 'Send To Printer'}"
+                        ToolTip="{Tr 'Send To Printer'}" />
                 <Button CommandParameter="{Binding ElementName=PrintTarget}"
                         Command="{Binding PrintTagToPdfCommand}"
-                        Content="Распечатать этикетку в .pdf" 
-                        ToolTip="Распечатать этикетку в формате .pdf и сохранить в файл"/>
+                        Content="{Tr 'Print To Pdf'}"
+                        ToolTip="{Tr 'Print To Pdf'}" />
             </StackPanel>
         </GroupBox>
     </Grid>

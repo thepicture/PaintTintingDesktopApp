@@ -1,4 +1,5 @@
-﻿using CSharpColorSpaceConverter;
+﻿using CodingSeb.Localization;
+using CSharpColorSpaceConverter;
 using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using System;
@@ -39,7 +40,8 @@ namespace PaintTintingDesktopApp.ViewModels
         public PrescriptionViewModel
             (List<Paint> resultingAndFirstAndSecondColors)
         {
-            Title = "Рецептура смеси";
+            Title = Loc.Tr(
+                GetType().Name);
             ResultPaint = resultingAndFirstAndSecondColors[0];
             FirstPaint = resultingAndFirstAndSecondColors[1];
             SecondPaint = resultingAndFirstAndSecondColors[2];

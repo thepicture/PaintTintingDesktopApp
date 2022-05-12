@@ -1,4 +1,8 @@
-﻿using PaintTintingDesktopApp.Commands;
+﻿using CodingSeb.Localization;
+using PaintTintingDesktopApp.Commands;
+using PaintTintingDesktopApp.Properties;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PaintTintingDesktopApp.ViewModels
@@ -8,6 +12,35 @@ namespace PaintTintingDesktopApp.ViewModels
         public NavigationViewModel()
         {
             NavigationService.Navigated += OnNavigated;
+        }
+
+        public ObservableCollection<string> Languages { get; set; }
+
+        private ComboBoxItem currentLanguage;
+
+        public ComboBoxItem CurrentLanguage
+        {
+            get => currentLanguage;
+
+            set
+            {
+                if (SetProperty(ref currentLanguage, value))
+                {
+                    if (currentLanguage.Content.ToString() == "English"
+                        || currentLanguage.Content.ToString() == "Английский")
+                    {
+                        Settings.Default.CurrentLanguage = "en";
+                    }
+                    else
+                    {
+                        Settings.Default.CurrentLanguage = "ru";
+                    }
+                    Settings.Default.Save();
+                    Loc.Instance.CurrentLanguage = Settings.Default.CurrentLanguage;
+                    CurrentViewModel.Title = Loc.Tr(
+                        CurrentViewModel.GetType().Name);
+                }
+            }
         }
 
         private void OnNavigated()

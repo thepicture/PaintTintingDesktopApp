@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Commands;
+﻿using CodingSeb.Localization;
+using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,8 +15,12 @@ namespace PaintTintingDesktopApp.ViewModels
     {
         public ColorMixViewModel()
         {
-            Title = "Страница смешивания пигментов";
-            ResultPaint = new Paint();
+            Title = Loc.Tr(
+                GetType().Name);
+            ResultPaint = new Paint
+            {
+                ColorAsHex = "#FFFFFF"
+            };
             ResultPaint.PropertyChanged += OnResultPaintChanged;
             InsertProvidersAsync();
             InsertParentsAsync();
@@ -49,7 +54,7 @@ namespace PaintTintingDesktopApp.ViewModels
             {
                 List<Paint> providersFromDatabase
                     = await entities.Paint
-                    .Include(p=>p.PaintProvider)
+                    .Include(p => p.PaintProvider)
                     .ToListAsync();
                 Parents = new ObservableCollection<Paint>
                     (providersFromDatabase);

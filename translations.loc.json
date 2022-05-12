@@ -1,0 +1,270 @@
+﻿{
+  "Select Lang": {
+    "en": "Select a language",
+    "ru": "Выберите язык"
+  },
+  "English": {
+    "en": "English",
+    "ru": "Английский"
+  },
+  "Russian": {
+    "en": "Russian",
+    "ru": "Русский"
+  },
+  "Data About Me": {
+    "en": "Data About Me",
+    "ru": "Данные обо мне"
+  },
+  "Change Photo": {
+    "en": "Change Photo",
+    "ru": "Изменить фото"
+  },
+  "Back": {
+    "en": "Go Back",
+    "ru": "Вернуться на предыдущую страницу"
+  },
+  "Log out": {
+    "en": "Logout",
+    "ru": "Выйти"
+  },
+  "Login": {
+    "en": "Login",
+    "ru": "Логин"
+  },
+  "Log in": {
+    "en": "Log in",
+    "ru": "Войти"
+  },
+  "Exit": {
+    "en": "Exit",
+    "ru": "Выключить"
+  },
+  "Password": {
+    "en": "Password",
+    "ru": "Пароль"
+  },
+  "RememberMe": {
+    "en": "Remember Me",
+    "ru": "Запомнить меня"
+  },
+  "IsNoAccount": {
+    "en": "Don't have account yet?",
+    "ru": "Ещё нет аккаунта?"
+  },
+  "LoginViewModel": {
+    "en": "Login Page",
+    "ru": "Страница авторизации"
+  },
+  "LastName": {
+    "en": "Last Name",
+    "ru": "Фамилия"
+  },
+  "FirstName": {
+    "en": "First Name",
+    "ru": "Имя"
+  },
+  "Patronymic": {
+    "en": "Patronymic (can be empty)",
+    "ru": "Отчество (необязательно)"
+  },
+  "Register": {
+    "en": "Register",
+    "ru": "Создать аккаунт"
+  },
+  "RegisterViewModel": {
+    "en": "Register Page",
+    "ru": "Страница регистрации"
+  },
+  "ControlPanelViewModel": {
+    "en": "Control Panel Page",
+    "ru": "Панель управления"
+  },
+  "MixPaint": {
+    "en": "Mix Paint",
+    "ru": "Смешать краску"
+  },
+  "MyAccount": {
+    "en": "My Account",
+    "ru": "Личный кабинет"
+  },
+  "Services": {
+    "en": "Services",
+    "ru": "Услуги"
+  },
+  "PaintCatalog": {
+    "en": "Paint Catalog",
+    "ru": "Каталог красок"
+  },
+  "Contacts": {
+    "en": "Contacts",
+    "ru": "Контакты"
+  },
+  "PaintTintingBuildViewModel": {
+    "en": "Paint Tinting Build Page",
+    "ru": "Страница создания красок"
+  },
+  "SelectColor": {
+    "en": "Select Color",
+    "ru": "Выберите цвет"
+  },
+  "ShowReceipt": {
+    "en": "Show Receipt",
+    "ru": "Показать рецептуру"
+  },
+  "AddNewColor": {
+    "en": "Add New Color",
+    "ru": "Добавить новый пигмент"
+  },
+  "For Mix Required": {
+    "en": "For Mix Required",
+    "ru": "Для смешения требуется"
+  },
+  "First Color": {
+    "en": "First Color",
+    "ru": "Первый цвет"
+  },
+  "Second Color": {
+    "en": "Second Color",
+    "ru": "Второй цвет"
+  },
+  "Product Name": {
+    "en": "Product Name: ",
+    "ru": "Название: "
+  },
+  "Paint Provider": {
+    "en": "Paint Provider: ",
+    "ru": "Поставщик: "
+  },
+  "Packaging In Liters": {
+    "en": "Packaging In Liters: ",
+    "ru": "Количество: "
+  },
+  "Price In Rubles": {
+    "en": "Price In Rubles: ",
+    "ru": "Стоимость: "
+  },
+  "ColorMixViewModel": {
+    "en": "Color Mix Page",
+    "ru": "Страница смешивания пигментов"
+  },
+  "Color Mix": {
+    "en": "Color Mix",
+    "ru": "Смешение красок"
+  },
+  "The Result Color": {
+    "en": "The Result Color",
+    "ru": "Получившийся пигмент"
+  },
+  "NameHint": {
+    "en": "* Name",
+    "ru": "* Название"
+  },
+  "ProviderHint": {
+    "en": "* Provider",
+    "ru": "* Поставщик"
+  },
+  "LitterHint": {
+    "en": "* Count In Liters",
+    "ru": "* Количество в литрах"
+  },
+  "Price In Rubles Hint": {
+    "en": "* Price In Rubles",
+    "ru": "* Стоимость в рублях"
+  },
+  "Select A Provider": {
+    "en": "Select A Provider",
+    "ru": "Выберите поставщика"
+  },
+  "Save Color": {
+    "en": "Save Color",
+    "ru": "Сохранить пигмент"
+  },
+  "PrescriptionViewModel": {
+    "en": "Color Mix Prescription",
+    "ru": "Рецептура смеси"
+  },
+  "Prescription": {
+    "en": "Prescription",
+    "ru": "Рецептура"
+  },
+  "Ticket": {
+    "en": "Ticket",
+    "ru": "Этикетка"
+  },
+  "ResultPrice": {
+    "en": "Result Price: ",
+    "ru": "ИТОГО: "
+  },
+  "Actions": {
+    "en": "Actions",
+    "ru": "Действия"
+  },
+  "Send To Printer": {
+    "en": "Send To Printer",
+    "ru": "Распечатать этикетку принтером"
+  },
+  "Print To Pdf": {
+    "en": "Print To Pdf",
+    "ru": "Распечатать этикетку в .pdf"
+  },
+  "Rubles": {
+    "en": "Rubles",
+    "ru": "руб."
+  },
+  "ServicesViewModel": {
+    "en": "Services View",
+    "ru": "Просмотр услуг"
+  },
+  "Search By Price": {
+    "en": "Search By Price",
+    "ru": "Поиск по цене"
+  },
+  "Search By Title": {
+    "en": "Search By Title",
+    "ru": "Поиск по названию"
+  },
+  "Search By Hex Color Code": {
+    "en": "Search By Hex Color Code",
+    "ru": "Поиск по коду цвета"
+  },
+  "No Any Results Have Been Found": {
+    "en": "No Any Results Have Been Found",
+    "ru": "Ничего не найдено"
+  },
+  "No Description Provided": {
+    "en": "No Description Provided",
+    "ru": "Описания нет"
+  },
+  "AccountViewModel": {
+    "en": "Account View",
+    "ru": "Личный кабинет"
+  },
+  "ContactsViewModel": {
+    "en": "Contacts View",
+    "ru": "Просмотр контактов"
+  },
+  "PaintsViewModel": {
+    "en": "Paints Catalog View",
+    "ru": "Просмотр каталога цвета"
+  },
+  "Search By Phone": {
+    "en": "Search By Phone",
+    "ru": "Поиск по телефону"
+  },
+  "Phone": {
+    "en": "Phone: ",
+    "ru": "Телефон: "
+  },
+  "Email": {
+    "en": "Email: ",
+    "ru": "Почта: "
+  },
+  "First Color Ancestor": {
+    "en": "First Color Ancestor: ",
+    "ru": "Первый цвет-предок: "
+  },
+  "Second Color Ancestor": {
+    "en": "Second Color Ancestor: ",
+    "ru": "Второй цвет-предок: "
+  }
+}

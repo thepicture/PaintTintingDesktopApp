@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PaintTintingDesktopApp.Properties;
+using PaintTintingDesktopApp.ViewModels;
+using System.Windows;
 
 namespace PaintTintingDesktopApp
 {
@@ -10,6 +12,14 @@ namespace PaintTintingDesktopApp
         public NavigationWindow()
         {
             InitializeComponent();
+            DataContext = new NavigationViewModel();
+        }
+
+        private void OnLanguagesLoaded(object sender, RoutedEventArgs e)
+        {
+            ComboLanguages.SelectedIndex = Settings.Default.CurrentLanguage == "en"
+                ? 0
+                : 1;
         }
     }
 }

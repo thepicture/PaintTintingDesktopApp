@@ -25,10 +25,10 @@
         </Grid.RowDefinitions>
         <UniformGrid Columns="2">
             <TextBox Text="{Binding PriceSearchText, UpdateSourceTrigger=PropertyChanged}"
-                     materialDesign:HintAssist.Hint="Поиск по цене"
-                     materialDesign:HintAssist.HelperText="* в рублях" />
+                     materialDesign:HintAssist.Hint="{Tr 'Search By Price'}"
+                     materialDesign:HintAssist.HelperText="{Tr 'Price In Rubles Hint'}" />
             <TextBox Text="{Binding ColorAsHexSearchText, UpdateSourceTrigger=PropertyChanged}"
-                     materialDesign:HintAssist.Hint="Поиск по коду цвета" />
+                     materialDesign:HintAssist.Hint="{Tr 'Search By Hex Color Code'}" />
         </UniformGrid>
         <ItemsControl ItemsSource="{Binding Paints}"
                       Grid.Row="1"
@@ -46,7 +46,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <TextBlock Text="Ничего не найдено"
+                                        <TextBlock Text="{Tr 'No Any Results Have Been Found'}"
                                                    TextAlignment="Center"
                                                    VerticalAlignment="Center"
                                                    Style="{StaticResource MaterialDesignHeadline3TextBlock}" />
@@ -77,10 +77,17 @@
                                     <TextBlock Text="{Binding ColorAsHex}"
                                                TextAlignment="Center"
                                                Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
-                                    <TextBlock Text="{Binding PriceInRubles, StringFormat={}{0:F0} руб за шт.}"
-                                               FontWeight="Bold"
-                                               Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                               TextAlignment="Center" />
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding PriceInRubles, StringFormat='{}{0:F0} '}"
+                                                   FontWeight="Bold"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                                   TextAlignment="Center" />
+                                        <TextBlock Text="{Tr 'Rubles'}"
+                                                   FontWeight="Bold"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                                   TextAlignment="Center" />
+                                    </StackPanel>
                                     <Line Stroke="{StaticResource MaterialDesignDarkSeparatorBackground}"
                                           X1="0"
                                           X2="300"
@@ -95,11 +102,16 @@
                                                  Height="20"
                                                  Margin="5"
                                                  Fill="{Binding Paint2.ColorAsHex}" />
-                                        <TextBlock Text="{Binding Paint2.ColorAsHex, StringFormat={}Первый цвет-предок: {0}, FallbackValue=Первого цвета-предка нет}"
-                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                                                   TextAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Grid.Column="1" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Grid.Column="1">
+                                            <TextBlock Text="{Tr 'First Color Ancestor'}"
+                                                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding Paint2.ColorAsHex, FallbackValue=?}"
+                                                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                       VerticalAlignment="Center" />
+                                        </StackPanel>
                                     </Grid>
                                     <Grid HorizontalAlignment="Center">
                                         <Grid.ColumnDefinitions>
@@ -110,20 +122,31 @@
                                                  Height="20"
                                                  Margin="5"
                                                  Fill="{Binding Paint3.ColorAsHex}" />
-                                        <TextBlock Text="{Binding Paint3.ColorAsHex, StringFormat={}Второй цвет-предок: {0}, FallbackValue=Второго цвета-предка нет}"
-                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                                                   TextAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Grid.Column="1" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Grid.Column="1">
+                                            <TextBlock Text="{Tr 'Second Color Ancestor'}"
+                                                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                       VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding Paint3.ColorAsHex, FallbackValue=?}"
+                                                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                       VerticalAlignment="Center" />
+                                        </StackPanel>
                                     </Grid>
                                     <Line Stroke="{StaticResource MaterialDesignDarkSeparatorBackground}"
                                           X1="0"
                                           X2="300"
                                           HorizontalAlignment="Center"
                                           Margin="10" />
-                                    <TextBlock Text="{Binding PaintProvider.Title, StringFormat={}Поставщик: {0}}"
-                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                                               TextAlignment="Center" />
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <TextBlock Text="{Tr 'Paint Provider'}"
+                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                   TextAlignment="Center" />
+                                        <TextBlock Text="{Binding PaintProvider.Title}"
+                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                   TextAlignment="Center" />
+                                    </StackPanel>
                                 </StackPanel>
                             </materialDesign:Card>
                         </materialDesign:Flipper.BackContent>

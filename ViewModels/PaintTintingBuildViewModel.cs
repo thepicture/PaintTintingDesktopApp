@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Commands;
+﻿using CodingSeb.Localization;
+using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,8 @@ namespace PaintTintingDesktopApp.ViewModels
     {
         public PaintTintingBuildViewModel()
         {
-            Title = "Страница создания краски";
+            Title = Loc.Tr(
+                GetType().Name);
             SearchTwoPaintingsAsync();
         }
 

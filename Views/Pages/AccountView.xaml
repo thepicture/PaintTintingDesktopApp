@@ -17,7 +17,7 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <GroupBox Header="Данные обо мне"
+    <GroupBox Header="{Tr 'Data About Me'}"
               Style="{StaticResource MaterialDesignCardGroupBox}"
               Margin="50">
         <StackPanel>
@@ -29,7 +29,7 @@
                 <materialDesign:PackIcon Kind="Email" />
                 <TextBox Text="{Binding SessionService.TemporaryIdentity.FullName, Mode=OneWay}"
                          IsReadOnly="True"
-                         Grid.Column="1"/>
+                         Grid.Column="1" />
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
                 </Ellipse.Fill>
             </Ellipse>
             <Button Command="{Binding SelectImageCommand}"
-                    Content="Изменить фото" />
+                    Content="{Tr 'Change Photo'}" />
         </StackPanel>
     </GroupBox>
 </UserControl>

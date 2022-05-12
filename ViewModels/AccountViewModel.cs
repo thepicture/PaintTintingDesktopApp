@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using CodingSeb.Localization;
+using Microsoft.Win32;
 using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using System.IO;
@@ -11,7 +12,8 @@ namespace PaintTintingDesktopApp.ViewModels
     {
         public AccountViewModel()
         {
-            Title = "Личный кабинет";
+            Title = Loc.Tr(
+                GetType().Name);
         }
 
         private Command selectImageCommand;

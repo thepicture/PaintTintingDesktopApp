@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\CodingSebLocalization.Fody.1.2.0\build\CodingSebLocalization.Fody.props" Condition="Exists('packages\CodingSebLocalization.Fody.1.2.0\build\CodingSebLocalization.Fody.props')" />
   <Import Project="packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props" Condition="Exists('packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -38,6 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CodingSeb.Localization, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CodingSeb.Localization.1.2.0\lib\netstandard2.0\CodingSeb.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="CodingSeb.Localization.FodyAddin, Version=1.2.0.0, Culture=neutral, PublicKeyToken=95afe81a20656348, processorArchitecture=MSIL">
+      <HintPath>packages\CodingSebLocalization.Fody.1.2.0\lib\netstandard2.0\CodingSeb.Localization.FodyAddin.dll</HintPath>
+    </Reference>
+    <Reference Include="CodingSeb.Localization.JsonFileLoader, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CodingSeb.Localization.JsonFileLoader.1.2.0\lib\netstandard2.0\CodingSeb.Localization.JsonFileLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="CodingSeb.Localization.WPF, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CodingSeb.Localization.WPF.1.2.0\lib\net462\CodingSeb.Localization.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="ColorPicker, Version=3.3.1.0, Culture=neutral, PublicKeyToken=1c61eec504ce2276, processorArchitecture=MSIL">
       <HintPath>packages\PixiEditor.ColorPicker.3.3.1\lib\net451\ColorPicker.dll</HintPath>
     </Reference>
@@ -296,6 +309,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="translations.loc.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -328,6 +342,12 @@
     <Error Condition="!Exists('packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets'))" />
     <Error Condition="!Exists('packages\Fody.6.5.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.5.1\build\Fody.targets'))" />
     <Error Condition="!Exists('packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\PropertyChanged.Fody.3.4.0\build\PropertyChanged.Fody.props'))" />
+    <Error Condition="!Exists('packages\CodingSebLocalization.Fody.1.2.0\build\CodingSebLocalization.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CodingSebLocalization.Fody.1.2.0\build\CodingSebLocalization.Fody.props'))" />
   </Target>
   <Import Project="packages\Fody.6.5.1\build\Fody.targets" Condition="Exists('packages\Fody.6.5.1\build\Fody.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties translations_1loc_1json__JsonSchema="utf" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

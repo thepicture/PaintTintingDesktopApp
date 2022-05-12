@@ -65,7 +65,7 @@ namespace PaintTintingDesktopApp.Services
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.StackTrace);
+                        Debug.WriteLine(ex);
                         return false;
                     }
                 }

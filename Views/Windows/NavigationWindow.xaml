@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:PaintTintingDesktopApp"
         mc:Ignorable="d"
         Height="1000"
-        Width="1400"
+        Width="1600"
         MinHeight="1000"
-        MinWidth="1400"
+        MinWidth="1600"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:NavigationViewModel}"
@@ -22,9 +22,6 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Icon="pack://application:,,,/Resources/hair-dye-white.png"
         WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <viewmodels:NavigationViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
@@ -39,11 +36,12 @@
                        Foreground="White"
                        Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
         </materialDesign:ColorZone>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right">
             <Button Command="{Binding GoBackCommand}"
-                    Content="Назад"
+                    Content="{Tr 'Back'}"
                     Margin="5"
-                    ToolTip="Вернуться на предыдущую страницу">
+                    ToolTip="{Tr 'Back'}">
                 <Button.Style>
                     <Style TargetType="Button"
                            BasedOn="{StaticResource MaterialDesignPaperButton}">
@@ -60,9 +58,9 @@
                 </Button.Style>
             </Button>
             <Button Command="{Binding ClearSessionCommand}"
-                    Content="Завершить сессию"
+                    Content="{Tr 'Log out'}"
                     Margin="5"
-                    ToolTip="Завершить сессию и вернуться на страницу авторизации">
+                    ToolTip="{Tr 'Log out'}">
                 <Button.Style>
                     <Style TargetType="Button"
                            BasedOn="{StaticResource MaterialDesignPaperButton}">
@@ -78,6 +76,15 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <ComboBox materialDesign:HintAssist.HelperText="{Tr 'Select Lang'}"
+                      SelectedItem="{Binding CurrentLanguage}"
+                      Foreground="White"
+                      Width="200"
+                      Name="ComboLanguages"
+                      Loaded="OnLanguagesLoaded">
+                <ComboBoxItem Content="{Tr 'English'}" Foreground="Black" />
+                <ComboBoxItem Content="{Tr 'Russian'}" Foreground="Black"/>
+            </ComboBox>
         </StackPanel>
         <Image Source="pack://application:,,,/Resources/hair-dye-white.png"
                HorizontalAlignment="Left"

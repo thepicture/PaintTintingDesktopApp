@@ -23,7 +23,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox Text="{Binding PhoneSearchText, UpdateSourceTrigger=PropertyChanged}"
-                 materialDesign:HintAssist.Hint="Поиск по телефону" />
+                 materialDesign:HintAssist.Hint="{Tr 'Search By Phone'}" />
         <ScrollViewer Grid.Row="1">
             <ItemsControl ItemsSource="{Binding Contacts}">
                 <ItemsControl.ItemsPanel>
@@ -44,10 +44,27 @@
                                       X2="300"
                                       HorizontalAlignment="Center"
                                       Margin="10" />
-                                <TextBlock Text="{Binding FormatedPhoneNumber, StringFormat=Телефон: {0}.}"
-                                           FontWeight="Bold"
-                                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                                           TextAlignment="Center" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Tr 'Phone'}"
+                                               FontWeight="Bold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                               TextAlignment="Center" />
+                                    <TextBlock Text="{Binding FormatedPhoneNumber}"
+                                               FontWeight="Bold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                               TextAlignment="Center" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center">
+                                    <TextBlock Text="{Tr 'Email'}"
+                                               FontWeight="Bold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                               TextAlignment="Center" />
+                                    <TextBlock Text="{Binding Email}"
+                                               FontWeight="Bold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                               TextAlignment="Center" />
+                                </StackPanel>
                             </StackPanel>
                         </materialDesign:Card>
                     </DataTemplate>

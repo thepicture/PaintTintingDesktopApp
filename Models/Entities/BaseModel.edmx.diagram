@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="PaintTintingBaseModel.Service" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="PaintTintingBaseModel.User" Width="1.5" PointX="3" PointY="9" />
         <EntityTypeShape EntityType="PaintTintingBaseModel.UserType" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="PaintTintingBaseModel.Contact" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="PaintTintingBaseModel.Contact" Width="1.5" PointX="5.25" PointY="6.25" />
         <AssociationConnector Association="PaintTintingBaseModel.FK_Contact_Customer" />
         <AssociationConnector Association="PaintTintingBaseModel.FK_Order_Customer" />
         <AssociationConnector Association="PaintTintingBaseModel.FK_Order_Paint" />

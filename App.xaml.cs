@@ -1,4 +1,6 @@
-﻿using PaintTintingDesktopApp.Models.Entities;
+﻿using CodingSeb.Localization;
+using CodingSeb.Localization.Loaders;
+using PaintTintingDesktopApp.Models.Entities;
 using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
 using PaintTintingDesktopApp.ViewModels;
@@ -15,6 +17,9 @@ namespace PaintTintingDesktopApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            LocalizationLoader.Instance.FileLanguageLoaders.Add(new JsonFileLoader());
+            LocalizationLoader.Instance.AddFile(@".\..\..\translations.loc.json");
+            Loc.Instance.CurrentLanguage = Settings.Default.CurrentLanguage;
             try
             {
                 using (PaintTintingBaseEntities entities

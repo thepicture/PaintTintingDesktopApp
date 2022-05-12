@@ -29,24 +29,24 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Button Command="{Binding GoToPaintTintingBuildViewModelCommand}"
-                Content="Смешать краску"
+                Content="{Tr MixPaint}"
                 Height="auto" />
         <Button Command="{Binding GoToAccountViewModelCommand}"
-                Content="Личный кабинет"
+                Content="{Tr 'MyAccount'}"
                 Grid.Column="1"
                 Height="auto" />
         <Button Command="{Binding GoToServicesViewModel}"
-                Content="Услуги"
+                Content="{Tr 'Services'}"
                 Grid.Row="1"
                 Height="auto" />
         <Button Command="{Binding GoToPaintsViewModel}"
-                Content="Каталог цвета"
+                Content="{Tr 'PaintCatalog'}"
                 Grid.Row="1"
                 Grid.RowSpan="2"
                 Grid.Column="1"
                 Height="auto" />
         <Button Command="{Binding GoToContactsViewModel}"
-                Content="Контакты"
+                Content="{Tr 'Contacts'}"
                 Grid.Row="2"
                 Height="auto" />
     </Grid>

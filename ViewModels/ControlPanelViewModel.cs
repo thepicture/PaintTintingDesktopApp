@@ -7,7 +7,8 @@ namespace PaintTintingDesktopApp.ViewModels
     {
         public ControlPanelViewModel()
         {
-            Title = "Панель управления";
+            Title = CodingSeb.Localization.Loc.Tr(
+                GetType().Name);
         }
 
         private Command goToPaintTintingBuildViewModelCommand;

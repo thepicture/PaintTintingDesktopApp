@@ -34,5 +34,17 @@ namespace PaintTintingDesktopApp.Properties {
                 this["UserBase64"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ru")]
+        public string CurrentLanguage {
+            get {
+                return ((string)(this["CurrentLanguage"]));
+            }
+            set {
+                this["CurrentLanguage"] = value;
+            }
+        }
     }
 }

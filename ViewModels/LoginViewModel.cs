@@ -1,4 +1,5 @@
-﻿using PaintTintingDesktopApp.Commands;
+﻿using CodingSeb.Localization;
+using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
 using PaintTintingDesktopApp.Models.PartialModels;
 using PaintTintingDesktopApp.Services;
@@ -19,7 +20,8 @@ namespace PaintTintingDesktopApp.ViewModels
             DependencyService.Get<IPasswordHashService>();
         public LoginViewModel()
         {
-            Title = "Страница авторизации";
+            Title = Loc.Tr(
+                GetType().Name);
         }
 
         private Command loginCommand;

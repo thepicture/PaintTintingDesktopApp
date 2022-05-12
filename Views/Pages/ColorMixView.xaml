@@ -23,38 +23,46 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <GroupBox Header="Смешение красок"
+        <GroupBox Header="{Tr 'Color Mix'}"
                   Grid.Column="1">
             <UniformGrid Columns="2">
-                <GroupBox Header="Первый цвет">
+                <GroupBox Header="{Tr 'First Color'}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <colorpicker:SquarePicker SelectedColor="{Binding ResultPaint.Paint2.ColorAsHex}"
-                                                  IsHitTestVisible="False" 
-                                                  Height="100"/>
+                                                  IsHitTestVisible="False"
+                                                  Height="100" />
                         <Grid Grid.Row="1">
                             <StackPanel>
                                 <ComboBox ItemsSource="{Binding Parents}"
                                           SelectedItem="{Binding ResultPaint.Paint2}"
                                           DisplayMemberPath="ProductName"
-                                          materialDesign:HintAssist.Hint="Выберите первый пигмент"
-                                          ToolTip="Выберите первый пигмент для смешения"/>
-                                <TextBlock Text="{Binding ResultPaint.Paint2.ProductName,
-                                                          StringFormat='Название: {0}'}" />
-                                <TextBlock Text="{Binding ResultPaint.Paint2.PaintProvider.Title,
-                                                          StringFormat='Поставщик: {0}'}" />
-                                <TextBlock Text="{Binding ResultPaint.Paint2.PackagingInLiters,
-                                                          StringFormat='Количество: {0}L.'}" />
-                                <TextBlock Text="{Binding ResultPaint.Paint2.PriceInRubles,
-                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                                          materialDesign:HintAssist.Hint="{Tr 'SelectColor'}"
+                                          ToolTip="{Tr 'SelectColor'}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Product Name'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint2.ProductName}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Paint Provider'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint2.PaintProvider.Title}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Packaging In Liters'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint2.PackagingInLiters, StringFormat='{}{0}L.'}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Price In Rubles'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint2.PriceInRubles, StringFormat={}{0:F0} руб.}" />
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Второй цвет">
+                <GroupBox Header="{Tr 'Second Color'}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -62,22 +70,30 @@
                         </Grid.RowDefinitions>
                         <colorpicker:SquarePicker SelectedColor="{Binding ResultPaint.Paint3.ColorAsHex}"
                                                   IsHitTestVisible="False"
-                                                  Height="100"/>
+                                                  Height="100" />
                         <Grid Grid.Row="1">
                             <StackPanel>
                                 <ComboBox ItemsSource="{Binding Parents}"
                                           SelectedItem="{Binding ResultPaint.Paint3}"
                                           DisplayMemberPath="ProductName"
-                                          materialDesign:HintAssist.Hint="Выберите второй пигмент"
-                                          ToolTip="Выберите второй пигмент для смешения"/>
-                                <TextBlock Text="{Binding ResultPaint.Paint3.ProductName,
-                                                          StringFormat='Название: {0}'}" />
-                                <TextBlock Text="{Binding ResultPaint.Paint3.PaintProvider.Title,
-                                                          StringFormat='Поставщик: {0}'}" />
-                                <TextBlock Text="{Binding ResultPaint.Paint3.PackagingInLiters,
-                                                          StringFormat='Количество: {0}L.'}" />
-                                <TextBlock Text="{Binding ResultPaint.Paint3.PriceInRubles,
-                                                          StringFormat='Стоимость: {0:F0} РУБ.'}" />
+                                          materialDesign:HintAssist.Hint="{Tr 'SelectColor'}"
+                                          ToolTip="{Tr 'SelectColor'}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Product Name'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint3.ProductName}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Paint Provider'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint3.PaintProvider.Title}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Packaging In Liters'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint3.PackagingInLiters, StringFormat='{}{0}L.'}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Tr 'Price In Rubles'}" />
+                                    <TextBlock Text="{Binding ResultPaint.Paint3.PriceInRubles, StringFormat={}{0:F0} руб.}" />
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -85,27 +101,27 @@
             </UniformGrid>
         </GroupBox>
         <GroupBox Grid.Row="1"
-                  Header="Получившийся пигмент">
+                  Header="{Tr 'The Result Color'}">
             <Grid>
                 <StackPanel>
                     <colorpicker:SquarePicker SelectedColor="{Binding ResultPaint.ColorAsHex}"
                                               IsHitTestVisible="False"
                                               Height="150" />
                     <TextBox Text="{Binding ResultPaint.ProductName}"
-                             materialDesign:HintAssist.Hint="* Название"/>
+                             materialDesign:HintAssist.Hint="{Tr 'NameHint'}" />
                     <ComboBox ItemsSource="{Binding Providers}"
                               SelectedItem="{Binding ResultPaint.PaintProvider}"
                               DisplayMemberPath="Title"
-                              materialDesign:HintAssist.Hint="* Поставщик" 
-                              ToolTip="Выберите поставщика"/>
+                              materialDesign:HintAssist.Hint="{Tr 'ProviderHint'}"
+                              ToolTip="{Tr 'Select A Provider'}" />
                     <TextBox Text="{Binding ResultPaint.PackagingInLiters}"
-                             materialDesign:HintAssist.HelperText="* Количество в литрах"/>
+                             materialDesign:HintAssist.HelperText="{Tr 'LitterHint'}" />
                     <TextBox Text="{Binding ResultPaint.PriceInRubles}"
-                             materialDesign:HintAssist.HelperText="* Стоимость в рублях"/>
+                             materialDesign:HintAssist.HelperText="{Tr 'Price In Rubles Hint'}" />
                     <Button Command="{Binding SavePaintingCommand}"
                             Margin="5 20 5 5"
-                            Content="Сохранить пигмент"
-                            ToolTip="Сохранить пигмент в базу данных"/>
+                            Content="{Tr 'Save Color'}"
+                            ToolTip="{Tr 'Save Color'}" />
                 </StackPanel>
             </Grid>
         </GroupBox>

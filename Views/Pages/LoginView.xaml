@@ -21,21 +21,21 @@
         <ProgressBar IsIndeterminate="True"
                      VerticalAlignment="Top"
                      Width="50"
-                     Opacity="{Binding IsBusy}"/>
+                     Opacity="{Binding IsBusy}" />
         <StackPanel Margin="60"
                     VerticalAlignment="Center">
             <UniformGrid Columns="2">
-                <TextBlock Text="Логин"
+                <TextBlock Text="{Tr 'Login'}"
                            Style="{StaticResource CommonBlock}" />
                 <TextBox Text="{Binding User.Login}"
-                         materialDesign:HintAssist.Hint="Введите логин"
+                         materialDesign:HintAssist.Hint="{Tr 'Login'}"
                          Grid.Column="1" />
             </UniformGrid>
             <UniformGrid Columns="2">
-                <TextBlock Text="Пароль"
+                <TextBlock Text="{Tr 'Password'}"
                            Style="{StaticResource CommonBlock}" />
                 <controls:BindablePasswordBox BindablePassword="{Binding User.PlainPassword}"
-                                              materialDesign:HintAssist.Hint="Введите пароль"
+                                              materialDesign:HintAssist.Hint="{Tr 'Password'}"
                                               Grid.Column="1" />
             </UniformGrid>
             <Grid>
@@ -44,23 +44,23 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Column="1"
-                          Content="Запомнить"
+                          Content="{Tr 'RememberMe'}"
                           IsChecked="{Binding IsRememberMe}" />
             </Grid>
             <UniformGrid Columns="2">
-                <Button Content="Авторизоваться"
-                        Command="{Binding LoginCommand}" 
+                <Button Content="{Tr 'Log in'}"
+                        Command="{Binding LoginCommand}"
                         IsEnabled="{Binding IsNotBusy}"
-                        ToolTip="Авторизоваться в системе под введёнными логином и паролем"/>
-                <Button Content="Выйти"
+                        ToolTip="{Tr 'Log in'}" />
+                <Button Content="{Tr 'Exit'}"
                         Command="{Binding ExitCommand}"
-                        Grid.Column="1" 
-                        ToolTip="Завершить работу приложения"/>
+                        Grid.Column="1"
+                        ToolTip="{Tr 'Exit'}" />
             </UniformGrid>
-            <Button Content="Ещё нет аккаунта?"
+            <Button Content="{Tr 'IsNoAccount'}"
                     Command="{Binding GoToRegisterPageCommand}"
-                    Grid.Column="1" 
-                    ToolTip="Перейти на страницу регистрации"/>
+                    Grid.Column="1"
+                    ToolTip="{Tr 'IsNoAccount'}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -21,42 +21,42 @@
     <StackPanel Margin="60"
                 VerticalAlignment="Center">
         <UniformGrid Columns="2">
-            <TextBlock Text="Логин"
+            <TextBlock Text="{Tr 'Login'}"
                        Style="{StaticResource CommonBlock}" />
             <TextBox Text="{Binding User.Login}"
-                     materialDesign:HintAssist.Hint="Введите логин"
+                     materialDesign:HintAssist.Hint="{Tr 'Login'}"
                      Grid.Column="1" />
         </UniformGrid>
         <UniformGrid Columns="2">
-            <TextBlock Text="Фамилия"
+            <TextBlock Text="{Tr 'LastName'}"
                        Style="{StaticResource CommonBlock}" />
             <TextBox Text="{Binding User.LastName}"
-                     materialDesign:HintAssist.Hint="Введите фамилию"
+                     materialDesign:HintAssist.Hint="{Tr 'LastName'}"
                      Grid.Column="1" />
         </UniformGrid>
         <UniformGrid Columns="2">
-            <TextBlock Text="Имя"
+            <TextBlock Text="{Tr 'FirstName'}"
                        Style="{StaticResource CommonBlock}" />
             <TextBox Text="{Binding User.FirstName}"
-                     materialDesign:HintAssist.Hint="Введите имя"
+                     materialDesign:HintAssist.Hint="{Tr 'FirstName'}"
                      Grid.Column="1" />
         </UniformGrid>
         <UniformGrid Columns="2">
-            <TextBlock Text="Отчество"
+            <TextBlock Text="{Tr 'Patronymic'}"
                        Style="{StaticResource CommonBlock}" />
             <TextBox Text="{Binding User.Patronymic}"
-                     materialDesign:HintAssist.Hint="Введите отчество (необязательно)"
+                     materialDesign:HintAssist.Hint="{Tr 'Patronymic'}"
                      Grid.Column="1" />
         </UniformGrid>
         <UniformGrid Columns="2">
-            <TextBlock Text="Пароль"
+            <TextBlock Text="{Tr 'Password'}"
                        Style="{StaticResource CommonBlock}" />
             <controls:BindablePasswordBox BindablePassword="{Binding User.PlainPassword}"
-                                          materialDesign:HintAssist.Hint="Введите пароль"
+                                          materialDesign:HintAssist.Hint="{Tr 'Password'}"
                                           Grid.Column="1" />
         </UniformGrid>
-        <Button Content="Зарегистрироваться"
-                Command="{Binding RegisterCommand}" 
-                ToolTip="Зарегистрироваться в системе с введёнными данными из полей"/>
+        <Button Content="{Tr 'Register'}"
+                Command="{Binding RegisterCommand}"
+                ToolTip="{Tr 'Register'}" />
     </StackPanel>
 </UserControl>

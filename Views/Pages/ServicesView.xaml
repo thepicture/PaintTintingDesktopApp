@@ -26,10 +26,10 @@
         </Grid.RowDefinitions>
         <UniformGrid Columns="2">
             <TextBox Text="{Binding PriceSearchText, UpdateSourceTrigger=PropertyChanged}"
-                     materialDesign:HintAssist.Hint="Поиск по цене"
-                     materialDesign:HintAssist.HelperText="* в рублях" />
+                     materialDesign:HintAssist.Hint="{Tr 'Search By Price'}"
+                     materialDesign:HintAssist.HelperText="{Tr 'Price In Rubles Hint'}" />
             <TextBox Text="{Binding TitleSearchText, UpdateSourceTrigger=PropertyChanged}"
-                     materialDesign:HintAssist.Hint="Поиск по названию" />
+                     materialDesign:HintAssist.Hint="{Tr 'Search By Title'}" />
         </UniformGrid>
         <ItemsControl ItemsSource="{Binding Services}"
                       Grid.Row="1"
@@ -48,7 +48,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <TextBlock Text="Ничего не найдено"
+                                        <TextBlock Text="{Tr 'No Any Results Have Been Found'}"
                                                    TextAlignment="Center"
                                                    VerticalAlignment="Center"
                                                    Style="{StaticResource MaterialDesignHeadline3TextBlock}" />
@@ -66,10 +66,12 @@
                                             Cursor="Hand">
                         <materialDesign:Flipper.FrontContent>
                             <GroupBox Header="{Binding Title}">
-                                <TextBlock Text="{Binding PriceInRubles, StringFormat={}{0:F0} руб.}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding PriceInRubles, StringFormat='{}{0:F0} '}"
+                                               Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
+                                    <TextBlock Text="{Tr 'Rubles'}"
+                                               Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
+                                </StackPanel>
                             </GroupBox>
                         </materialDesign:Flipper.FrontContent>
                         <materialDesign:Flipper.BackContent>
@@ -85,7 +87,7 @@
                                           X2="300"
                                           HorizontalAlignment="Center"
                                           Margin="10" />
-                                    <TextBlock Text="{Binding Description, StringFormat={}Описание: {0}, TargetNullValue='Описания нет'}"
+                                    <TextBlock Text="{Binding Description, StringFormat={}{0}}"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                                                TextAlignment="Center"
                                                TextWrapping="Wrap" />
