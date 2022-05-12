@@ -43,6 +43,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PriceInRubles" Type="money" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2048" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -153,6 +162,7 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paint" EntityType="Self.Paint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaintProvider" EntityType="Self.PaintProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
@@ -193,6 +203,7 @@
           <EntitySet Name="Order" EntityType="PaintTintingBaseModel.Order" />
           <EntitySet Name="Paint" EntityType="PaintTintingBaseModel.Paint" />
           <EntitySet Name="PaintProvider" EntityType="PaintTintingBaseModel.PaintProvider" />
+          <EntitySet Name="Service" EntityType="PaintTintingBaseModel.Service" />
           <EntitySet Name="User" EntityType="PaintTintingBaseModel.User" />
           <EntitySet Name="UserType" EntityType="PaintTintingBaseModel.UserType" />
           <AssociationSet Name="FK_Order_Customer" Association="PaintTintingBaseModel.FK_Order_Customer">
@@ -272,6 +283,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Paint" Relationship="PaintTintingBaseModel.FK_Paint_PaintProvider" FromRole="PaintProvider" ToRole="Paint" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PriceInRubles" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -424,6 +444,16 @@
           <EntitySetMapping Name="PaintProvider">
             <EntityTypeMapping TypeName="PaintTintingBaseModel.PaintProvider">
               <MappingFragment StoreEntitySet="PaintProvider">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="PaintTintingBaseModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PriceInRubles" ColumnName="PriceInRubles" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

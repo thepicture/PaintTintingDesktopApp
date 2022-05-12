@@ -126,6 +126,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\ServicesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\NavigationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,6 +170,10 @@
     <Compile Include="Models\Entities\PaintProvider.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Service.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ServicesDataStore.cs" />
     <Compile Include="Services\UserDataStore.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\ControlPanelViewModel.cs" />
@@ -205,6 +213,7 @@
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\PaintTintingBuildViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Pages\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -226,6 +235,9 @@
     </Compile>
     <Compile Include="Views\Pages\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ServicesView.xaml.cs">
+      <DependentUpon>ServicesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\NavigationWindow.xaml.cs">
       <DependentUpon>NavigationWindow.xaml</DependentUpon>

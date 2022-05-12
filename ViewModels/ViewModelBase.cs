@@ -21,6 +21,8 @@ namespace PaintTintingDesktopApp.ViewModels
             DependencyService.Get<IDataStore<RegisterUser>>();
         public IDataStore<User> UserDataStore =>
             DependencyService.Get<IDataStore<User>>();
+        public IDataStore<Service> ServicesDataStore =>
+            DependencyService.Get<IDataStore<Service>>();
         public IMessageBoxService MessageBoxService =>
             DependencyService.Get<IMessageBoxService>();
         public ISessionService<User> SessionService =>

@@ -35,7 +35,8 @@
                 Content="Личный кабинет"
                 Grid.Column="1"
                 Height="auto" />
-        <Button Content="Услуги"
+        <Button Command="{Binding GoToServicesViewModel}"
+                Content="Услуги"
                 Grid.Row="1"
                 Height="auto" />
         <Button Content="Каталог цвета"

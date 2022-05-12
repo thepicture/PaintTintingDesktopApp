@@ -49,5 +49,25 @@ namespace PaintTintingDesktopApp.ViewModels
         {
             NavigationService.Navigate<AccountViewModel>();
         }
+
+        private Command goToServicesViewModel;
+
+        public ICommand GoToServicesViewModel
+        {
+            get
+            {
+                if (goToServicesViewModel == null)
+                {
+                    goToServicesViewModel = new Command(PerformGoToServicesViewModel);
+                }
+
+                return goToServicesViewModel;
+            }
+        }
+
+        private void PerformGoToServicesViewModel()
+        {
+            NavigationService.Navigate<ServicesViewModel>();
+        }
     }
 }
