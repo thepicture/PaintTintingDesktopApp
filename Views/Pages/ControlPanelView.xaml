@@ -44,7 +44,8 @@
                 Grid.RowSpan="2"
                 Grid.Column="1"
                 Height="auto" />
-        <Button Content="Контакты"
+        <Button Command="{Binding GoToContactsViewModel}"
+                Content="Контакты"
                 Grid.Row="2"
                 Height="auto" />
     </Grid>

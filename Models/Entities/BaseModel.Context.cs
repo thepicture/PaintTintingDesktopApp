@@ -32,5 +32,6 @@ namespace PaintTintingDesktopApp.Models.Entities
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserType> UserType { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
     }
 }

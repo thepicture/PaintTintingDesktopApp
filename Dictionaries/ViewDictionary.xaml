@@ -26,4 +26,7 @@
     <DataTemplate DataType="{x:Type viewmodels:ServicesViewModel}">
         <views:ServicesView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:ContactsViewModel}">
+        <views:ContactsView />
+    </DataTemplate>
 </ResourceDictionary>
