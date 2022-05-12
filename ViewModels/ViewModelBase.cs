@@ -14,19 +14,21 @@ namespace PaintTintingDesktopApp.ViewModels
         public INavigationService<ViewModelBase> NavigationService =>
             DependencyService.Get<INavigationService<ViewModelBase>>();
         public IDataStore<LoginUser> LoginDataStore =>
-           DependencyService.Get<IDataStore<LoginUser>>();
+            DependencyService.Get<IDataStore<LoginUser>>();
         public IDataStore<Paint> PaintDataStore =>
-          DependencyService.Get<IDataStore<Paint>>();
+            DependencyService.Get<IDataStore<Paint>>();
         public IDataStore<RegisterUser> RegisterDataStore =>
-           DependencyService.Get<IDataStore<RegisterUser>>();
+            DependencyService.Get<IDataStore<RegisterUser>>();
+        public IDataStore<User> UserDataStore =>
+            DependencyService.Get<IDataStore<User>>();
         public IMessageBoxService MessageBoxService =>
             DependencyService.Get<IMessageBoxService>();
         public ISessionService<User> SessionService =>
             DependencyService.Get<ISessionService<User>>();
         public IBlenderService BlenderService =>
-           DependencyService.Get<IBlenderService>();
+            DependencyService.Get<IBlenderService>();
         public IClosestColorService ClosestColorService =>
-          DependencyService.Get<IClosestColorService>();
+            DependencyService.Get<IClosestColorService>();
 
         private bool isBusy;
         public bool IsBusy

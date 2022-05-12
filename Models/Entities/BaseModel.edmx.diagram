@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cd162d2914174fc0aba6e528ab27ef14" Name="Diagram1">
-        <EntityTypeShape EntityType="PaintTintingBaseModel.Customer" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="PaintTintingBaseModel.Customer" Width="1.5" PointX="3" PointY="10.625" />
         <EntityTypeShape EntityType="PaintTintingBaseModel.Order" Width="1.5" PointX="5.25" PointY="1.5" />
         <EntityTypeShape EntityType="PaintTintingBaseModel.Paint" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="PaintTintingBaseModel.PaintProvider" Width="1.5" PointX="0.75" PointY="2.125" />
-        <EntityTypeShape EntityType="PaintTintingBaseModel.User" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="PaintTintingBaseModel.UserType" Width="1.5" PointX="0.75" PointY="9.25" />
+        <EntityTypeShape EntityType="PaintTintingBaseModel.User" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="PaintTintingBaseModel.UserType" Width="1.5" PointX="0.75" PointY="7.5" />
         <AssociationConnector Association="PaintTintingBaseModel.FK_Order_Customer" />
         <AssociationConnector Association="PaintTintingBaseModel.FK_Order_Paint" />
         <AssociationConnector Association="PaintTintingBaseModel.FK_Order_User" />

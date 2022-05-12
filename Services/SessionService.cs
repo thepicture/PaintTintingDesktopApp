@@ -6,8 +6,11 @@ using System.Text;
 
 namespace PaintTintingDesktopApp.Services
 {
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class SessionService : ISessionService<User>
     {
+        private User temporaryIdentity;
+
         public User PermanentIdentity
         {
             get => JsonConvert.DeserializeObject<User>(
@@ -22,6 +25,7 @@ namespace PaintTintingDesktopApp.Services
 
             set
             {
+                TemporaryIdentity = value;
                 string serializedUser = JsonConvert
                     .SerializeObject(value, new JsonSerializerSettings
                     {
@@ -35,7 +39,21 @@ namespace PaintTintingDesktopApp.Services
             }
         }
 
-        public User TemporaryIdentity { get; set; }
+        public User TemporaryIdentity
+        {
+            get
+            {
+                if (PermanentIdentity is User user)
+                {
+                    return user;
+                }
+                else
+                {
+                    return temporaryIdentity;
+                }
+            }
+            set => temporaryIdentity = value;
+        }
 
         public void Abandon()
         {

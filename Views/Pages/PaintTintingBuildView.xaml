@@ -16,9 +16,6 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="750"
              d:DesignWidth="1000">
-    <UserControl.DataContext>
-        <viewmodels:PaintTintingBuildViewModel />
-    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

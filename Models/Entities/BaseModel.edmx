@@ -55,6 +55,7 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary(max)" Nullable="false" />
           <Property Name="Salt" Type="varbinary" MaxLength="16" Nullable="false" />
+          <Property Name="Photo" Type="image" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -284,6 +285,7 @@
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="16" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Order" Relationship="PaintTintingBaseModel.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="UserType" Relationship="PaintTintingBaseModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
         </EntityType>
@@ -430,6 +432,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="PaintTintingBaseModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="Login" ColumnName="Login" />

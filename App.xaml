@@ -57,6 +57,10 @@
                 <Setter Property="Margin"
                         Value="5" />
             </Style>
+            <Style TargetType="materialDesign:PackIcon">
+                <Setter Property="Margin"
+                        Value="5" />
+            </Style>
             <Style TargetType="colorpicker:StandardColorPicker">
                 <Setter Property="ShowAlpha"
                         Value="False" />

@@ -49,6 +49,7 @@ namespace PaintTintingDesktopApp
             DependencyService.Register<BlenderService>();
             DependencyService.Register<ClosestColorService>();
             DependencyService.Register<PaintDataStore>();
+            DependencyService.Register<UserDataStore>();
 
             DependencyService.Get<INavigationService<ViewModelBase>>()
                    .Navigate<LoginViewModel>();
@@ -56,11 +57,11 @@ namespace PaintTintingDesktopApp
                 Settings.Default.UserBase64))
             {
                 DependencyService.Get<INavigationService<ViewModelBase>>()
-                   .Navigate<PaintTintingBuildViewModel>();
+                   .Navigate<ControlPanelViewModel>();
             }
         }
 
-        void InsertUser(PaintTintingBaseEntities entities)
+        private void InsertUser(PaintTintingBaseEntities entities)
         {
             byte[] salt = Guid
                 .NewGuid()

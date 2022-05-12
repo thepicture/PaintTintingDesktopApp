@@ -55,7 +55,7 @@ namespace PaintTintingDesktopApp.ViewModels
                         SessionService.TemporaryIdentity = identity;
                     }
                 }
-                NavigationService.Navigate<PaintTintingBuildViewModel>();
+                NavigationService.Navigate<ControlPanelViewModel>();
             }
             IsBusy = false;
         }
