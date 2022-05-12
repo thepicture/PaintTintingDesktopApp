@@ -39,7 +39,8 @@
                 Content="Услуги"
                 Grid.Row="1"
                 Height="auto" />
-        <Button Content="Каталог цвета"
+        <Button Command="{Binding GoToPaintsViewModel}"
+                Content="Каталог цвета"
                 Grid.Row="1"
                 Grid.RowSpan="2"
                 Grid.Column="1"

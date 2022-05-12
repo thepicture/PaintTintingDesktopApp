@@ -118,6 +118,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\PaintsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\PaintTintingBuildView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +191,7 @@
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\ControlPanelViewModel.cs" />
+    <Compile Include="ViewModels\PaintsViewModel.cs" />
     <Compile Include="ViewModels\PrescriptionViewModel.cs" />
     <Compile Include="Models\Entities\User.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
@@ -239,6 +244,9 @@
     </Compile>
     <Compile Include="Views\Pages\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PaintsView.xaml.cs">
+      <DependentUpon>PaintsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PaintTintingBuildView.xaml.cs">
       <DependentUpon>PaintTintingBuildView.xaml</DependentUpon>

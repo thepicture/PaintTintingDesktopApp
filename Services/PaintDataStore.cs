@@ -1,6 +1,7 @@
 ﻿using PaintTintingDesktopApp.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,9 +96,16 @@ namespace PaintTintingDesktopApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Paint>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Paint>> GetItemsAsync(bool forceRefresh = false)
         {
-            throw new NotImplementedException();
+            using (PaintTintingBaseEntities entities = new PaintTintingBaseEntities())
+            {
+                return await entities.Paint
+                    .Include(p => p.PaintProvider)
+                    .Include(p => p.Paint2)
+                    .Include(p => p.Paint3)
+                    .ToListAsync();
+            }
         }
 
         public Task<bool> UpdateItemAsync(Paint item)

@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="PaintTintingDesktopApp.Views.Pages.PaintsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PaintTintingDesktopApp.Views.Pages"
+             xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:PaintsViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             SizeChanged="OnSizeChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2">
+            <TextBox Text="{Binding PriceSearchText, UpdateSourceTrigger=PropertyChanged}"
+                     materialDesign:HintAssist.Hint="Поиск по цене"
+                     materialDesign:HintAssist.HelperText="* в рублях" />
+            <TextBox Text="{Binding ColorAsHexSearchText, UpdateSourceTrigger=PropertyChanged}"
+                     materialDesign:HintAssist.Hint="Поиск по коду цвета" />
+        </UniformGrid>
+        <ItemsControl ItemsSource="{Binding Paints}"
+                      Grid.Row="1"
+                      Margin="20">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems"
+                                 Value="false">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBlock Text="Ничего не найдено"
+                                                   TextAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource MaterialDesignHeadline3TextBlock}" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <materialDesign:Flipper MouseDown="OnMouseDown"
+                                            Height="310"
+                                            MaxWidth="600"
+                                            Margin="20"
+                                            Cursor="Hand">
+                        <materialDesign:Flipper.FrontContent>
+                            <GroupBox Header="{Binding ColorAsHex}">
+                                <Ellipse Width="230"
+                                         Height="230"
+                                         Fill="{Binding ColorAsHex}" />
+                            </GroupBox>
+                        </materialDesign:Flipper.FrontContent>
+                        <materialDesign:Flipper.BackContent>
+                            <materialDesign:Card>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding ColorAsHex}"
+                                               TextAlignment="Center"
+                                               Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
+                                    <TextBlock Text="{Binding PriceInRubles, StringFormat={}{0:F0} руб за шт.}"
+                                               FontWeight="Bold"
+                                               Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                               TextAlignment="Center" />
+                                    <Line Stroke="{StaticResource MaterialDesignDarkSeparatorBackground}"
+                                          X1="0"
+                                          X2="300"
+                                          HorizontalAlignment="Center"
+                                          Margin="10" />
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Width="20"
+                                                 Height="20"
+                                                 Margin="5"
+                                                 Fill="{Binding Paint2.ColorAsHex}" />
+                                        <TextBlock Text="{Binding Paint2.ColorAsHex, StringFormat={}Первый цвет-предок: {0}, FallbackValue=Первого цвета-предка нет}"
+                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                   TextAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Grid.Column="1" />
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Width="20"
+                                                 Height="20"
+                                                 Margin="5"
+                                                 Fill="{Binding Paint3.ColorAsHex}" />
+                                        <TextBlock Text="{Binding Paint3.ColorAsHex, StringFormat={}Второй цвет-предок: {0}, FallbackValue=Второго цвета-предка нет}"
+                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                   TextAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Grid.Column="1" />
+                                    </Grid>
+                                    <Line Stroke="{StaticResource MaterialDesignDarkSeparatorBackground}"
+                                          X1="0"
+                                          X2="300"
+                                          HorizontalAlignment="Center"
+                                          Margin="10" />
+                                    <TextBlock Text="{Binding PaintProvider.Title, StringFormat={}Поставщик: {0}}"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                               TextAlignment="Center" />
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </materialDesign:Flipper.BackContent>
+                    </materialDesign:Flipper>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
