@@ -59,7 +59,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Tr 'Paint Provider'}" />
-                                    <TextBlock Text="{Binding FirstFoundPaint.PaintProvider}" />
+                                    <TextBlock Text="{Binding FirstFoundPaint.PaintProvider.Title}" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Tr 'Packaging In Liters'}" />
@@ -88,7 +88,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Tr 'Paint Provider'}" />
-                                    <TextBlock Text="{Binding SecondFoundPaint.PaintProvider}" />
+                                    <TextBlock Text="{Binding SecondFoundPaint.PaintProvider.Title}" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Tr 'Packaging In Liters'}" />
