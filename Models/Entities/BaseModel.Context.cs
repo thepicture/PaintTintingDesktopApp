@@ -16,7 +16,7 @@ namespace PaintTintingDesktopApp.Models.Entities
     public partial class PaintTintingBaseEntities : DbContext
     {
         public PaintTintingBaseEntities()
-            : base("name=PaintTintingBaseEntities")
+            : base(App.Connection)
         {
         }
     

@@ -5,6 +5,8 @@ using PaintTintingDesktopApp.Properties;
 using PaintTintingDesktopApp.Services;
 using PaintTintingDesktopApp.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -15,34 +17,17 @@ namespace PaintTintingDesktopApp
     /// </summary>
     public partial class App : Application
     {
+        public static readonly string DataSourcesPath = "./../../DataSources.txt";
+
+        public static string Connection { get; private set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            ShutDownIfDataSourcesAreInvalid();
+
             LocalizationLoader.Instance.FileLanguageLoaders.Add(new JsonFileLoader());
             LocalizationLoader.Instance.AddFile(@".\..\..\translations.loc.json");
             Loc.Instance.CurrentLanguage = Settings.Default.CurrentLanguage;
-            try
-            {
-                using (PaintTintingBaseEntities entities
-                    = new PaintTintingBaseEntities())
-                {
-                    entities.Database.Connection.Open();
-                    if (!entities.User.Any(u => u.Login == "seller"))
-                    {
-                        InsertUser(entities);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                new MessageBoxService()
-                    .InformErrorAsync("Запуск приложения "
-                    + "невозможен, так как "
-                    + "база данных недоступна. "
-                    + "Проверьте подключение "
-                    + "и перезапустите приложение. "
-                    + ex)
-                        .Wait();
-            }
 
             base.OnStartup(e);
             DependencyService.Register<NavigationService>();
@@ -68,28 +53,57 @@ namespace PaintTintingDesktopApp
             }
         }
 
-        private void InsertUser(PaintTintingBaseEntities entities)
+        private void ShutDownIfDataSourcesAreInvalid()
         {
-            byte[] salt = Guid
-                .NewGuid()
-                .ToByteArray()
-                .Take(16)
-                .ToArray();
-            byte[] passwordHash = DependencyService
-                .Get<IPasswordHashService>()
-                .GetHash("123", salt);
-            User user = new User
+            if (!IsNoneOfDataSourcesWorks())
             {
-                UserType = entities.UserType.First(t => t.Title == "Продавец"),
-                LastName = "Иванов",
-                FirstName = "Иван",
-                Patronymic = "Иванович",
-                Login = "seller",
-                PasswordHash = passwordHash,
-                Salt = salt
-            };
-            _ = entities.User.Add(user);
-            _ = entities.SaveChanges();
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Работа программы невозможна. "
+                                + "Все строки "
+                                + "подключения недоступны "
+                                + "для связи с хранилищем данных");
+                Shutdown();
+            }
+        }
+
+        private static bool IsNoneOfDataSourcesWorks()
+        {
+            // File must contain line-by-line data sources. Looping from the last to the first.
+            Stack<string> sources = new Stack<string>(
+                File.ReadAllLines(DataSourcesPath));
+            while (sources.Count > 0)
+            {
+                string connection = default;
+                try
+                {
+                    connection = $@"metadata=res://*/Models.Entities.BaseModel.csdl|res://*/Models.Entities.BaseModel.ssdl|res://*/Models.Entities.BaseModel.msl;
+                                    provider=System.Data.SqlClient;
+                                    provider connection string="";
+                                    data source={sources.Pop()};
+                                    initial catalog=PaintTintingBase;
+                                    integrated security=True;
+                                    MultipleActiveResultSets=True;
+                                    App=EntityFramework""";
+                    using (PaintTintingBaseEntities entities = new PaintTintingBaseEntities(connection))
+                    {
+                        entities.Database.Connection.Open();
+                    }
+                    Connection = connection;
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine("Connection string "
+                                            + connection
+                                            + " is not working: "
+                                            + ex.ToString());
+                    continue;
+                }
+            }
+            return true;
         }
     }
 }

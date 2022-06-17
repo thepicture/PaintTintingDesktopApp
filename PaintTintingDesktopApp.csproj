@@ -198,6 +198,7 @@
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PartialModels\PartialContact.cs" />
+    <Compile Include="Models\PartialModels\PartialContext.cs" />
     <Compile Include="Services\ContactsDataStore.cs" />
     <Compile Include="Services\ServicesDataStore.cs" />
     <Compile Include="Services\UserDataStore.cs" />
