@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PaintTintingDesktopApp.Services
@@ -11,7 +12,7 @@ namespace PaintTintingDesktopApp.Services
             return await Task.Run(() =>
             {
                 return MessageBox.Show(questionAsString,
-                                       "Вопрос",
+                                       CultureInfo.CurrentUICulture.Name.Contains("ru-") ? "Вопрос" : "Question",
                                        MessageBoxButton.YesNo,
                                        MessageBoxImage.Question)
                     == MessageBoxResult.Yes;
@@ -24,7 +25,7 @@ namespace PaintTintingDesktopApp.Services
             await Task.Run(() =>
             {
                 return MessageBox.Show(informationAsString,
-                                "Информация",
+                                CultureInfo.CurrentUICulture.Name.Contains("ru-") ? "Информация" : "Information",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
             });
@@ -36,7 +37,7 @@ namespace PaintTintingDesktopApp.Services
             await Task.Run(() =>
             {
                 return MessageBox.Show(errorAsString,
-                                "Ошибка",
+                                CultureInfo.CurrentUICulture.Name.Contains("ru-") ? "Ошибка" : "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             });
@@ -48,7 +49,7 @@ namespace PaintTintingDesktopApp.Services
             await Task.Run(() =>
             {
                 return MessageBox.Show(warningAsString,
-                                       "Предупреждение",
+                                       CultureInfo.CurrentUICulture.Name.Contains("ru-") ? "Предупреждение" : "Warning",
                                        MessageBoxButton.OK,
                                        MessageBoxImage.Warning);
             });
