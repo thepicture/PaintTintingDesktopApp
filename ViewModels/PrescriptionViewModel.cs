@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.IO;
 using System.Printing;
 using System.Windows;
@@ -169,16 +170,43 @@ namespace PaintTintingDesktopApp.ViewModels
 
         private async void PrintTagToPdfAsync(object parameter)
         {
-            using (PrintServer printServer = new PrintServer())
+            try
             {
-                PrintDialog printDialog = new PrintDialog
+                using (PrintServer printServer = new PrintServer())
                 {
-                    PrintQueue = new PrintQueue(printServer,
-                                                "Microsoft Print To PDF"),
-                };
-                printDialog.PrintVisual((Visual)parameter,
-                                        "Печать этикетки в .pdf");
-                await MessageBoxService.InformAsync("Этикетка распечатана");
+                    CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
+                    if (cultureInfo.Name.Contains("en-"))
+                    {
+                        PrintDialog printDialog = new PrintDialog
+                        {
+                            PrintQueue = new PrintQueue(printServer,
+                                                        "Microsoft Print To PDF"),
+                        };
+                        printDialog.PrintVisual((Visual)parameter,
+                                                "Ticket print to pdf");
+                        await MessageBoxService.InformAsync("Ticket has been printed");
+                    }
+                    else if (cultureInfo.Name.Contains("ru-"))
+                    {
+                        PrintDialog printDialog = new PrintDialog
+                        {
+                            PrintQueue = new PrintQueue(printServer,
+                                                      "Печать в PDF (Майкрософт)"),
+                        };
+                        printDialog.PrintVisual((Visual)parameter,
+                                                "Печать этикетки в .pdf");
+                        await MessageBoxService.InformAsync("Этикетка распечатана");
+                    }
+                    else
+                    {
+                        throw new Exception("Can't print to pdf because the system language is not supported");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxService.InformErrorAsync(
+                    "Не удалось сохранить в pdf Формат. Причина: " + ex);
             }
         }
 
