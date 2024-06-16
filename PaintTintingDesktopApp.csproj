@@ -198,11 +198,15 @@
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factories\PaintFactory.cs" />
+    <Compile Include="Models\Factories\PrintDocumentFactory.cs" />
     <Compile Include="Models\PartialModels\PartialContact.cs" />
     <Compile Include="Models\PartialModels\PartialContext.cs" />
     <Compile Include="Services\ContactsDataStore.cs" />
     <Compile Include="Services\ServicesDataStore.cs" />
     <Compile Include="Services\UserDataStore.cs" />
+    <Compile Include="Models\Strategies\IPrintStrategy.cs" />
+    <Compile Include="Models\Strategies\PrintToPdfStrategy.cs" />
+    <Compile Include="Models\Strategies\PrintToPrinterStrategy.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
     <Compile Include="ViewModels\ControlPanelViewModel.cs" />
