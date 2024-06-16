@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaintTintingDesktopApp"
         mc:Ignorable="d"
-        Height="1000"
-        Width="1600"
-        MinHeight="1000"
-        MinWidth="1600"
+        Height="600"
+        Width="900"
+        MinHeight="600"
+        MinWidth="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewmodels="clr-namespace:PaintTintingDesktopApp.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:NavigationViewModel}"
@@ -32,7 +32,8 @@
                                   VerticalAlignment="Stretch">
             <TextBlock Text="{Binding CurrentViewModel.Title}"
                        VerticalAlignment="Center"
-                       TextAlignment="Center"
+                       TextAlignment="Left"
+                       Margin="90 0 0 0"
                        Foreground="White"
                        Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
         </materialDesign:ColorZone>

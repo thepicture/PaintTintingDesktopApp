@@ -1,6 +1,7 @@
 ﻿using CodingSeb.Localization;
 using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Models.Factories;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -165,13 +166,7 @@ namespace PaintTintingDesktopApp.ViewModels
             NavigationService.NavigateWithParameter
                 <PrescriptionViewModel, List<Paint>>(new List<Paint>
             {
-                new Paint
-                {
-                    ColorAsHex = "#"
-                    + SelectedColor.R.ToString("x2")
-                    + SelectedColor.G.ToString("x2")
-                    + selectedColor.B.ToString("x2")
-                },
+                PaintFactory.CreatePaint(selectedColor),
                 FirstFoundPaint,
                 SecondFoundPaint
             });

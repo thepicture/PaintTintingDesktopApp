@@ -1,6 +1,7 @@
 ﻿using CodingSeb.Localization;
 using PaintTintingDesktopApp.Commands;
 using PaintTintingDesktopApp.Models.Entities;
+using PaintTintingDesktopApp.Models.Factories;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,10 +18,7 @@ namespace PaintTintingDesktopApp.ViewModels
         {
             Title = Loc.Tr(
                 GetType().Name);
-            ResultPaint = new Paint
-            {
-                ColorAsHex = "#FFFFFF"
-            };
+            ResultPaint = PaintFactory.CreatePaint("ffffff");
             ResultPaint.PropertyChanged += OnResultPaintChanged;
             InsertProvidersAsync();
             InsertParentsAsync();
@@ -32,7 +30,6 @@ namespace PaintTintingDesktopApp.ViewModels
             if (ResultPaint.Paint2 == null
                 || ResultPaint.Paint3 == null)
             {
-                ResultPaint.ColorAsHex = "#FFFFFF";
                 return;
             }
             Color firstHexColor = (Color)ColorConverter
@@ -41,7 +38,7 @@ namespace PaintTintingDesktopApp.ViewModels
                 .ConvertFromString(ResultPaint.Paint3.ColorAsHex);
             Color resultingColor = BlenderService
                 .Mix(firstHexColor, secondHexColor);
-            ResultPaint.ColorAsHex = "#"
+            ResultPaint.ColorAsHex = "#FF"
                 + resultingColor.R.ToString("x2")
                 + resultingColor.G.ToString("x2")
                 + resultingColor.B.ToString("x2");

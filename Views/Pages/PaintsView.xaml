@@ -30,14 +30,15 @@
             <TextBox Text="{Binding ColorAsHexSearchText, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="{Tr 'Search By Hex Color Code'}" />
         </UniformGrid>
-        <ItemsControl ItemsSource="{Binding Paints}"
-                      Grid.Row="1"
-                      Margin="20">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+        <ListView ItemsSource="{Binding Paints}"
+                  Grid.Row="1"
+                  Margin="20">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ItemsControl.Style>
                 <Style TargetType="ItemsControl">
                     <Style.Triggers>
@@ -60,15 +61,20 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <materialDesign:Flipper MouseDown="OnMouseDown"
-                                            Height="310"
-                                            MaxWidth="600"
                                             Margin="20"
                                             Cursor="Hand">
                         <materialDesign:Flipper.FrontContent>
-                            <GroupBox Header="{Binding ColorAsHex}">
-                                <Ellipse Width="230"
-                                         Height="230"
-                                         Fill="{Binding ColorAsHex}" />
+                            <GroupBox Header="{Binding ColorAsHex}" >
+                                <Grid>
+                                    <Ellipse Width="100"
+                                         Height="100"
+                                         Fill="{Binding ColorAsHex}" 
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding ProductName}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Style="{StaticResource MaterialDesignHeadline3TextBlock}"
+                                               />
+                                </Grid>
                             </GroupBox>
                         </materialDesign:Flipper.FrontContent>
                         <materialDesign:Flipper.BackContent>
@@ -153,6 +159,6 @@
                     </materialDesign:Flipper>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ListView>
     </Grid>
 </UserControl>

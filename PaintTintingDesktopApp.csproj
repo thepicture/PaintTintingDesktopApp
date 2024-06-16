@@ -197,6 +197,7 @@
     <Compile Include="Models\Entities\Service.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Factories\PaintFactory.cs" />
     <Compile Include="Models\PartialModels\PartialContact.cs" />
     <Compile Include="Models\PartialModels\PartialContext.cs" />
     <Compile Include="Services\ContactsDataStore.cs" />
@@ -302,6 +303,7 @@
       <LastGenOutput>BaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include=".editorconfig" />
+    <None Include="Models\ClassDiagram.cd" />
     <None Include="Models\Entities\BaseModel.edmx.diagram">
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </None>
@@ -317,11 +319,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="DataSources.txt" />
     <Content Include="Models\Entities\BaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\Entities\BaseModel.edmx.sql" />
     <Content Include="Models\Entities\BaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BaseModel.edmx</DependentUpon>

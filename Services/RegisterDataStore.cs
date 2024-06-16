@@ -82,7 +82,7 @@ namespace PaintTintingDesktopApp.Services
                 await DependencyService
                     .Get<IMessageBoxService>()
                     .InformAsync("Регистрация не удалась. "
-                    + "Проверьте подключение к интернету");
+                    + "Проверьте подключение к базе данных");
             }
             return isRegistered;
         }
